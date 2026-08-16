@@ -161,7 +161,9 @@ end
 
 </details>
 
-Spine-2
+<details>
+<summary>Spine-2</summary>
+
 ```
 Spine-2#sh run
 ! Command: show running-config
@@ -220,7 +222,12 @@ router multicast
 end
 
 ```
-Leaf-1
+
+</details>
+
+<details>
+<summary>Leaf-1</summary>
+
 ```
 Leaf-1#sh run
 ! Command: show running-config
@@ -279,7 +286,12 @@ router multicast
 end
 
 ```
-Leaf-2
+
+</details>
+
+<details>
+<summary>Leaf-2</summary>
+
 ```
 Leaf-2#sh run
 ! Command: show running-config
@@ -342,7 +354,12 @@ router multicast
 end
 
 ```
-Leaf-3
+
+</details>
+
+<details>
+<summary>Leaf-3</summary>
+
 ```
 Leaf-3#sh run
 ! Command: show running-config
@@ -400,6 +417,8 @@ router multicast
 end
 
 ```
+
+</details>
 
 ## 5. Проверка
 Проверяем связность Spine-Leaf
