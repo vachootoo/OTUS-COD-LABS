@@ -38,7 +38,7 @@ Loopback
 | Leaf-3 | Loopback0 | `10.255.0.13/32` | 
 
 
-Point-to-Point Networks
+Сети Point-to-Point
 
 Для соединений Spine ↔ Leaf используются сети `/31`.
 
