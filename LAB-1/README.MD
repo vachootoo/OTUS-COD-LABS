@@ -96,7 +96,81 @@ Spine-2 P2P
 ├── 10.0.2.4  Spine-2
 └── 10.0.2.5  Leaf-3
 ```
-## 4 Проверка
+
+## 4. Конфигурация оборудования
+Spine-1
+```
+Spine-1#sh run
+! Command: show running-config
+! device: Spine-1 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Spine-1
+!
+spanning-tree mode mstp
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.0/31
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.1.2/31
+!
+interface Ethernet3
+   no switchport
+   ip address 10.0.1.4/31
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.1/32
+!
+interface Management1
+!
+ip routing
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+
+```
+Spine-2
+```
+```
+Leaf-1
+```
+```
+Leaf-2
+```
+```
+Leaf-3
+```
+```
+
+## 5. Проверка
 Проверяем связность Spine-Leaf
 
 Spine-1-Leaf-1
