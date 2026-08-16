@@ -98,7 +98,8 @@ Spine-2 P2P
 ```
 
 ## 4. Конфигурация оборудования
-Spine-1
+<details>
+<summary>Spine-1</summary>
 ```
 Spine-1#sh run
 ! Command: show running-config
@@ -157,6 +158,7 @@ router multicast
 end
 
 ```
+</details>
 Spine-2
 ```
 Spine-2#sh run
