@@ -100,7 +100,7 @@ Spine-2 P2P
 ## 4. Конфигурация оборудования
 <details>
 <summary>Spine-1</summary>
-```
+
 Spine-1#sh run
 ! Command: show running-config
 ! device: Spine-1 (vEOS-lab, EOS-4.33.1.1F)
@@ -157,8 +157,8 @@ router multicast
 !
 end
 
-```
 </details>
+
 Spine-2
 ```
 Spine-2#sh run
