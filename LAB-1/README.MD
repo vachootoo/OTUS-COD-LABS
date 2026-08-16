@@ -11,7 +11,7 @@ IP-план предназначен для Leaf-Spine фабрики
 - L3 Point-to-Point соединения между каждым Leaf и каждым Spine
 ---
 ## 2. Топология
-![Архитектура сети](clos_scheme.jpg)
+![Архитектура сети](OTUS-COD-LABS/LAB-1/clos_scheme.JPG)
 
 ## 3. Адресное пространство
 
