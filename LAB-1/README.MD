@@ -27,7 +27,7 @@ IP-план предназначен для Leaf-Spine фабрики
 | Loopback0 | `10.255.0.0/24` |
 
 | Device | Interface | IP Address |
-|---|---|---|---:|
+|---|---|---|
 | SPINE1 | Loopback0 | `10.255.0.1/32` | 
 | SPINE2 | Loopback0 | `10.255.0.2/32` | 
 | LEAF1 | Loopback0 | `10.255.0.11/32` | 
