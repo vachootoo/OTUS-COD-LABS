@@ -423,7 +423,7 @@ end
 ## 5. Проверка
 Проверяем связность Spine-Leaf
 
-Spine-1-Leaf-1
+**Spine-1-Leaf-1**
 ```
 Spine-1#ping 10.0.1.1
 PING 10.0.1.1 (10.0.1.1) 72(100) bytes of data.
@@ -437,7 +437,7 @@ PING 10.0.1.1 (10.0.1.1) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 43ms
 rtt min/avg/max/mdev = 1.814/4.210/12.514/4.162 ms, pipe 2, ipg/ewma 10.639/8.205 ms
 ```
-Spine-1-Leaf-2
+**Spine-1-Leaf-2**
 ```
 Spine-1#ping 10.0.1.3
 PING 10.0.1.3 (10.0.1.3) 72(100) bytes of data.
@@ -451,7 +451,7 @@ PING 10.0.1.3 (10.0.1.3) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 24ms
 rtt min/avg/max/mdev = 1.604/3.220/6.774/1.873 ms, ipg/ewma 6.047/4.915 ms
 ```
-Spine-1-Leaf-3
+**Spine-1-Leaf-3**
 ```
 Spine-1#ping 10.0.1.5
 PING 10.0.1.5 (10.0.1.5) 72(100) bytes of data.
@@ -465,7 +465,7 @@ PING 10.0.1.5 (10.0.1.5) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 23ms
 rtt min/avg/max/mdev = 2.312/3.380/6.207/1.460 ms, ipg/ewma 5.691/4.722 ms
 ```
-Spine-2-Leaf-1
+**Spine-2-Leaf-1**
 ```
 Spine-2#ping 10.0.2.1
 PING 10.0.2.1 (10.0.2.1) 72(100) bytes of data.
@@ -479,7 +479,7 @@ PING 10.0.2.1 (10.0.2.1) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 10ms
 rtt min/avg/max/mdev = 2.162/2.357/2.490/0.118 ms, ipg/ewma 2.493/2.402 ms
 ```
-Spine-2-Leaf-2
+**Spine-2-Leaf-2**
 ```
 Spine-2#ping 10.0.2.3
 PING 10.0.2.3 (10.0.2.3) 72(100) bytes of data.
@@ -494,7 +494,7 @@ PING 10.0.2.3 (10.0.2.3) 72(100) bytes of data.
 rtt min/avg/max/mdev = 1.324/1.966/2.774/0.524 ms, ipg/ewma 2.797/2.339 ms
 
 ```
-Spine-2-Leaf-3
+**Spine-2-Leaf-3**
 ```
 Spine-2#ping 10.0.2.5
 PING 10.0.2.5 (10.0.2.5) 72(100) bytes of data.
