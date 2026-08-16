@@ -97,6 +97,8 @@ Spine-2 P2P
 └── 10.0.2.5  Leaf-3
 ```
 ## 3. Проверка
+Проверяем связность Spine-Leaf
+Spine-1-Leaf-1
 ```
 Spine-1#ping 10.0.1.1
 PING 10.0.1.1 (10.0.1.1) 72(100) bytes of data.
@@ -109,4 +111,18 @@ PING 10.0.1.1 (10.0.1.1) 72(100) bytes of data.
 --- 10.0.1.1 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 43ms
 rtt min/avg/max/mdev = 1.814/4.210/12.514/4.162 ms, pipe 2, ipg/ewma 10.639/8.205 ms
+```
+Spine-2-Leaf-1
+```
+Spine-2#ping 10.0.2.1
+PING 10.0.2.1 (10.0.2.1) 72(100) bytes of data.
+80 bytes from 10.0.2.1: icmp_seq=1 ttl=64 time=2.46 ms
+80 bytes from 10.0.2.1: icmp_seq=2 ttl=64 time=2.49 ms
+80 bytes from 10.0.2.1: icmp_seq=3 ttl=64 time=2.37 ms
+80 bytes from 10.0.2.1: icmp_seq=4 ttl=64 time=2.16 ms
+80 bytes from 10.0.2.1: icmp_seq=5 ttl=64 time=2.30 ms
+
+--- 10.0.2.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 10ms
+rtt min/avg/max/mdev = 2.162/2.357/2.490/0.118 ms, ipg/ewma 2.493/2.402 ms
 ```
