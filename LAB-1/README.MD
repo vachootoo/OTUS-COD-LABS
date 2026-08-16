@@ -98,6 +98,7 @@ Spine-2 P2P
 ```
 ## 3. Проверка
 Проверяем связность Spine-Leaf
+
 Spine-1-Leaf-1
 ```
 Spine-1#ping 10.0.1.1
