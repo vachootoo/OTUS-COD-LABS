@@ -113,6 +113,34 @@ PING 10.0.1.1 (10.0.1.1) 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 43ms
 rtt min/avg/max/mdev = 1.814/4.210/12.514/4.162 ms, pipe 2, ipg/ewma 10.639/8.205 ms
 ```
+Spine-1-Leaf-2
+```
+Spine-1#ping 10.0.1.3
+PING 10.0.1.3 (10.0.1.3) 72(100) bytes of data.
+80 bytes from 10.0.1.3: icmp_seq=1 ttl=64 time=6.77 ms
+80 bytes from 10.0.1.3: icmp_seq=2 ttl=64 time=3.41 ms
+80 bytes from 10.0.1.3: icmp_seq=3 ttl=64 time=1.60 ms
+80 bytes from 10.0.1.3: icmp_seq=4 ttl=64 time=2.15 ms
+80 bytes from 10.0.1.3: icmp_seq=5 ttl=64 time=2.17 ms
+
+--- 10.0.1.3 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 24ms
+rtt min/avg/max/mdev = 1.604/3.220/6.774/1.873 ms, ipg/ewma 6.047/4.915 ms
+```
+Spine-1-Leaf-3
+```
+Spine-1#ping 10.0.1.5
+PING 10.0.1.5 (10.0.1.5) 72(100) bytes of data.
+80 bytes from 10.0.1.5: icmp_seq=1 ttl=64 time=6.21 ms
+80 bytes from 10.0.1.5: icmp_seq=2 ttl=64 time=3.37 ms
+80 bytes from 10.0.1.5: icmp_seq=3 ttl=64 time=2.61 ms
+80 bytes from 10.0.1.5: icmp_seq=4 ttl=64 time=2.41 ms
+80 bytes from 10.0.1.5: icmp_seq=5 ttl=64 time=2.31 ms
+
+--- 10.0.1.5 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 23ms
+rtt min/avg/max/mdev = 2.312/3.380/6.207/1.460 ms, ipg/ewma 5.691/4.722 ms
+```
 Spine-2-Leaf-1
 ```
 Spine-2#ping 10.0.2.1
@@ -126,4 +154,33 @@ PING 10.0.2.1 (10.0.2.1) 72(100) bytes of data.
 --- 10.0.2.1 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 10ms
 rtt min/avg/max/mdev = 2.162/2.357/2.490/0.118 ms, ipg/ewma 2.493/2.402 ms
+```
+Spine-2-Leaf-2
+```
+Spine-2#ping 10.0.2.3
+PING 10.0.2.3 (10.0.2.3) 72(100) bytes of data.
+80 bytes from 10.0.2.3: icmp_seq=1 ttl=64 time=2.77 ms
+80 bytes from 10.0.2.3: icmp_seq=2 ttl=64 time=2.35 ms
+80 bytes from 10.0.2.3: icmp_seq=3 ttl=64 time=1.74 ms
+80 bytes from 10.0.2.3: icmp_seq=4 ttl=64 time=1.32 ms
+80 bytes from 10.0.2.3: icmp_seq=5 ttl=64 time=1.64 ms
+
+--- 10.0.2.3 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 11ms
+rtt min/avg/max/mdev = 1.324/1.966/2.774/0.524 ms, ipg/ewma 2.797/2.339 ms
+
+```
+Spine-2-Leaf-3
+```
+Spine-2#ping 10.0.2.5
+PING 10.0.2.5 (10.0.2.5) 72(100) bytes of data.
+80 bytes from 10.0.2.5: icmp_seq=1 ttl=64 time=2.77 ms
+80 bytes from 10.0.2.5: icmp_seq=2 ttl=64 time=1.86 ms
+80 bytes from 10.0.2.5: icmp_seq=3 ttl=64 time=1.63 ms
+80 bytes from 10.0.2.5: icmp_seq=4 ttl=64 time=1.71 ms
+80 bytes from 10.0.2.5: icmp_seq=5 ttl=64 time=1.89 ms
+
+--- 10.0.2.5 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 18ms
+rtt min/avg/max/mdev = 1.629/1.972/2.768/0.409 ms, ipg/ewma 4.601/2.358 ms
 ```
