@@ -26,7 +26,7 @@ IP-план предназначен для Leaf-Spine фабрики
 | Spine2 P2P | `10.0.2.0/24` |
 | Loopback0 | `10.255.0.0/24` |
 
-| Device | Interface | IP Address | ASN |
+| Device | Interface | IP Address |
 |---|---|---|---:|
 | SPINE1 | Loopback0 | `10.255.0.1/32` | 
 | SPINE2 | Loopback0 | `10.255.0.2/32` | 
