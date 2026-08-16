@@ -31,11 +31,11 @@ Loopback
 
 | Device | Interface | IP Address |
 |---|---|---|
-| SPINE1 | Loopback0 | `10.255.0.1/32` | 
-| SPINE2 | Loopback0 | `10.255.0.2/32` | 
-| LEAF1 | Loopback0 | `10.255.0.11/32` | 
-| LEAF2 | Loopback0 | `10.255.0.12/32` | 
-| LEAF3 | Loopback0 | `10.255.0.13/32` | 
+| Spine-1 | Loopback0 | `10.255.0.1/32` | 
+| Spine-2 | Loopback0 | `10.255.0.2/32` | 
+| Leaf-1 | Loopback0 | `10.255.0.11/32` | 
+| Leaf-2 | Loopback0 | `10.255.0.12/32` | 
+| Leaf-3 | Loopback0 | `10.255.0.13/32` | 
 
 
 Point-to-Point Networks
