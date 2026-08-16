@@ -27,7 +27,7 @@ IP-план предназначен для Leaf-Spine фабрики
 | Spine-2 P2P | `10.0.2.0/24` |
 | Loopback0 | `10.255.0.0/24` |
 
-Loopback
+**Loopback**
 
 | Device | Interface | IP Address |
 |---|---|---|
@@ -38,7 +38,7 @@ Loopback
 | Leaf-3 | Loopback0 | `10.255.0.13/32` | 
 
 
-Сети Point-to-Point
+**Сети Point-to-Point**
 
 Для соединений Spine ↔ Leaf используются сети `/31`.
 
