@@ -554,8 +554,10 @@ Neighbor ID     Instance VRF      Pri State                  Dead Time   Address
 Каждый Leaf должен иметь двух OSPF-соседей:
 
 ```
+
 **Spine-1**
 **Spine-2**
+
 ```
 
 ```
