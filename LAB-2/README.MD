@@ -50,6 +50,7 @@ interface Ethernet1
 | Loopback0 | `10.255.0.0/24` |
 
 ---
+**Loopback 0**
 
 | Device | IP Address |
 |---|---|
