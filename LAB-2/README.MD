@@ -557,8 +557,26 @@ Neighbor ID     Instance VRF      Pri State                  Dead Time   Address
 Spine-1
 Spine-2
 
-Например для Leaf-1:
-
-10.255.0.1    FULL    Ethernet1
-10.255.0.2    FULL    Ethernet2
 ```
+Leaf-1#sh ip ospf neighbor
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.255.0.1      1        default  0   FULL                   00:00:30    10.0.1.0        Ethernet1
+10.255.0.2      1        default  1   FULL                   00:00:37    10.0.2.0        Ethernet2
+
+```
+```
+Leaf-2#sh ip ospf neighbor
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.255.0.2      1        default  0   FULL                   00:00:31    10.0.2.2        Ethernet2
+10.255.0.1      1        default  0   FULL                   00:00:30    10.0.1.2        Ethernet1
+
+```
+```
+Leaf-3#sh ip ospf neighbor
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.255.0.2      1        default  0   FULL                   00:00:29    10.0.2.4        Ethernet2
+10.255.0.1      1        default  0   FULL                   00:00:38    10.0.1.4        Ethernet1
+
+```
+
+
