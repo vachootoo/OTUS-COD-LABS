@@ -522,11 +522,11 @@ end
 После настройки каждый Spine должен иметь по три OSPF-соседа
 
 ```
-SPINE1
+Spine-1
 Leaf-1    Router-ID 10.255.0.11    Ethernet1
 Leaf-2    Router-ID 10.255.0.12    Ethernet2
 Leaf-3    Router-ID 10.255.0.13    Ethernet3
-SPINE2
+Spine-2
 Leaf-1    Router-ID 10.255.0.11    Ethernet1
 Leaf-2    Router-ID 10.255.0.12    Ethernet2
 Leaf-3    Router-ID 10.255.0.13    Ethernet3
