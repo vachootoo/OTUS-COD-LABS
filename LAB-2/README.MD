@@ -27,7 +27,7 @@ ip routing
 4. Настроить OSPF:
 
 ```text
-router ospf 100
+router ospf 1
    router-id 10.255.0.1
 ```
 
@@ -50,7 +50,6 @@ interface Ethernet1
 | SPINE1 P2P | `10.0.1.0/24` |
 | SPINE2 P2P | `10.0.2.0/24` |
 | Loopback0 | `10.255.0.0/24` |
-| Loopback1 / VTEP | `10.255.1.0/24` |
 
 ---
 
