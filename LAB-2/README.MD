@@ -167,17 +167,27 @@ hostname Spine-2
 !
 spanning-tree mode mstp
 !
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
 interface Ethernet1
    no switchport
    ip address 10.0.2.0/31
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
 !
 interface Ethernet2
    no switchport
    ip address 10.0.2.2/31
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
 !
 interface Ethernet3
    no switchport
    ip address 10.0.2.4/31
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
 !
 interface Ethernet4
 !
@@ -191,6 +201,7 @@ interface Ethernet8
 !
 interface Loopback0
    ip address 10.255.0.2/32
+   ip ospf area 0.0.0.0
 !
 interface Management1
 !
@@ -203,7 +214,12 @@ router multicast
    ipv6
       software-forwarding kernel
 !
+router ospf 1
+   router-id 10.255.0.2
+   max-lsa 12000
+!
 end
+
 
 ```
 
