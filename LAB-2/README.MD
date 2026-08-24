@@ -38,6 +38,14 @@ interface Ethernet1
    ip ospf area 0
    ip ospf network point-to-point
 ```
+4. На Loopback интерфейсах включить OSPF:
+
+```text
+interface Loopback0
+   ip address 10.255.0.1/32
+   ip ospf area 0
+
+```
 
 ---
 
