@@ -511,6 +511,7 @@ end
 
 ## 4. Проверка
 
+```
 SPINE1
 LEAF1    Router-ID 10.255.0.11    Ethernet1
 LEAF2    Router-ID 10.255.0.12    Ethernet2
@@ -519,9 +520,11 @@ SPINE2
 LEAF1    Router-ID 10.255.0.11    Ethernet1
 LEAF2    Router-ID 10.255.0.12    Ethernet2
 LEAF3    Router-ID 10.255.0.13    Ethernet3
+```
 
 Каждый Leaf должен иметь двух OSPF-соседей:
 
+```
 SPINE1
 SPINE2
 
@@ -529,3 +532,4 @@ SPINE2
 
 10.255.0.1    FULL    Ethernet1
 10.255.0.2    FULL    Ethernet2
+```
