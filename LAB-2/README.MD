@@ -524,6 +524,19 @@ Leaf-2    Router-ID 10.255.0.12    Ethernet2
 Leaf-3    Router-ID 10.255.0.13    Ethernet3
 ```
 
+<details>
+<summary>Spine-1</summary>
+
+```
+Spine-1#sh ip ospf neighbor
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.255.0.13     1        default  0   FULL                   00:00:36    10.0.1.5        Ethernet3
+10.255.0.12     1        default  0   FULL                   00:00:31    10.0.1.3        Ethernet2
+10.255.0.11     1        default  1   FULL                   00:00:32    10.0.1.1        Ethernet1
+```
+
+</details>
+
 Каждый Leaf должен иметь двух OSPF-соседей:
 
 ```
