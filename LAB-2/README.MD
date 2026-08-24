@@ -537,6 +537,20 @@ Neighbor ID     Instance VRF      Pri State                  Dead Time   Address
 
 </details>
 
+<details>
+<summary>Spine-2</summary>
+
+```
+Spine-2#sh ip ospf neighbor
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.255.0.11     1        default  0   FULL                   00:00:37    10.0.2.1        Ethernet1
+10.255.0.12     1        default  0   FULL                   00:00:34    10.0.2.3        Ethernet2
+10.255.0.13     1        default  0   FULL                   00:00:37    10.0.2.5        Ethernet3
+
+```
+
+</details>
+
 Каждый Leaf должен иметь двух OSPF-соседей:
 
 ```
