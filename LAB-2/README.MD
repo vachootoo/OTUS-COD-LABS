@@ -333,11 +333,15 @@ interface Ethernet1
    description to Spine-1
    no switchport
    ip address 10.0.1.3/31
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
 !
 interface Ethernet2
    description to Spine-2
    no switchport
    ip address 10.0.2.3/31
+   ip ospf network point-to-point
+   ip ospf area 0.0.0.0
 !
 interface Ethernet3
 !
@@ -353,6 +357,7 @@ interface Ethernet8
 !
 interface Loopback0
    ip address 10.255.0.12/32
+   ip ospf area 0.0.0.0
 !
 interface Management1
 !
@@ -365,7 +370,12 @@ router multicast
    ipv6
       software-forwarding kernel
 !
+router ospf 1
+   router-id 10.255.0.12
+   max-lsa 12000
+!
 end
+
 
 ```
 
