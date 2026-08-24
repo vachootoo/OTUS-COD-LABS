@@ -628,3 +628,189 @@ Source Codes:
 
 </details>
 
+<details>
+<summary>Spine-2</summary>
+
+```
+Spine-2#sh ip route ospf
+
+VRF: default
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+ O        10.0.1.0/31 [110/20]
+           via 10.0.2.1, Ethernet1
+ O        10.0.1.2/31 [110/20]
+           via 10.0.2.3, Ethernet2
+ O        10.0.1.4/31 [110/20]
+           via 10.0.2.5, Ethernet3
+ O        10.255.0.1/32 [110/30]
+           via 10.0.2.1, Ethernet1
+           via 10.0.2.3, Ethernet2
+           via 10.0.2.5, Ethernet3
+ O        10.255.0.11/32 [110/20]
+           via 10.0.2.1, Ethernet1
+ O        10.255.0.12/32 [110/20]
+           via 10.0.2.3, Ethernet2
+ O        10.255.0.13/32 [110/20]
+           via 10.0.2.5, Ethernet3
+
+
+```
+
+</details>
+
+<details>
+<summary>Leaf-1</summary>
+
+```
+Leaf-1#sh ip route ospf
+
+VRF: default
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+ O        10.0.1.2/31 [110/20]
+           via 10.0.1.0, Ethernet1
+ O        10.0.1.4/31 [110/20]
+           via 10.0.1.0, Ethernet1
+ O        10.0.2.2/31 [110/20]
+           via 10.0.2.0, Ethernet2
+ O        10.0.2.4/31 [110/20]
+           via 10.0.2.0, Ethernet2
+ O        10.255.0.1/32 [110/20]
+           via 10.0.1.0, Ethernet1
+ O        10.255.0.2/32 [110/20]
+           via 10.0.2.0, Ethernet2
+ O        10.255.0.12/32 [110/30]
+           via 10.0.1.0, Ethernet1
+           via 10.0.2.0, Ethernet2
+ O        10.255.0.13/32 [110/30]
+           via 10.0.1.0, Ethernet1
+           via 10.0.2.0, Ethernet2
+
+
+```
+
+</details>
+
+<details>
+<summary>Leaf-2</summary>
+
+```
+Leaf-2#sh ip route ospf
+
+VRF: default
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+ O        10.0.1.0/31 [110/20]
+           via 10.0.1.2, Ethernet1
+ O        10.0.1.4/31 [110/20]
+           via 10.0.1.2, Ethernet1
+ O        10.0.2.0/31 [110/20]
+           via 10.0.2.2, Ethernet2
+ O        10.0.2.4/31 [110/20]
+           via 10.0.2.2, Ethernet2
+ O        10.255.0.1/32 [110/20]
+           via 10.0.1.2, Ethernet1
+ O        10.255.0.2/32 [110/20]
+           via 10.0.2.2, Ethernet2
+ O        10.255.0.11/32 [110/30]
+           via 10.0.1.2, Ethernet1
+           via 10.0.2.2, Ethernet2
+ O        10.255.0.13/32 [110/30]
+           via 10.0.1.2, Ethernet1
+           via 10.0.2.2, Ethernet2
+
+
+```
+
+</details>
+
+<details>
+<summary>Leaf-3</summary>
+
+```
+Leaf-3#sh ip ospf neighbor
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address                                            Interface
+10.255.0.2      1        default  0   FULL                   00:00:34    10.0.2.                                   4        Ethernet2
+10.255.0.1      1        default  0   FULL                   00:00:33    10.0.1.                                   4        Ethernet1
+Leaf-3#sh ip ospf neighbor
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+10.255.0.2      1        default  0   FULL                   00:00:29    10.0.2.4        Ethernet2
+10.255.0.1      1        default  0   FULL                   00:00:38    10.0.1.4        Ethernet1
+Leaf-3#sh ip route ospf
+
+VRF: default
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+ O        10.0.1.0/31 [110/20]
+           via 10.0.1.4, Ethernet1
+ O        10.0.1.2/31 [110/20]
+           via 10.0.1.4, Ethernet1
+ O        10.0.2.0/31 [110/20]
+           via 10.0.2.4, Ethernet2
+ O        10.0.2.2/31 [110/20]
+           via 10.0.2.4, Ethernet2
+ O        10.255.0.1/32 [110/20]
+           via 10.0.1.4, Ethernet1
+ O        10.255.0.2/32 [110/20]
+           via 10.0.2.4, Ethernet2
+ O        10.255.0.11/32 [110/30]
+           via 10.0.1.4, Ethernet1
+           via 10.0.2.4, Ethernet2
+ O        10.255.0.12/32 [110/30]
+           via 10.0.1.4, Ethernet1
+           via 10.0.2.4, Ethernet2
+
+
+```
+
+</details>
+
