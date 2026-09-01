@@ -680,11 +680,19 @@ show isis database detail
 В Level-2 LSDB должны присутствовать все пять устройств:
 
 ```text
-SPINE-1
-SPINE-2
-LEAF-1
-LEAF-2
-LEAF-3
+Spine-1(config)#show isis database
+Legend:
+H - hostname conflict
+U - node unreachable
+
+IS-IS Instance: UNDERLAY VRF: default
+  IS-IS Level 2 Link State Database
+    LSPID                   Seq Num  Cksum  Life Length IS  Received LSPID        Flags
+    Spine-1.00-00                86  37516   751    147 L2  0000.0000.0001.00-00  <>
+    Spine-2.00-00                20  59246   968    147 L2  0000.0000.0002.00-00  <>
+    Leaf-1.00-00                 84  32919   415    122 L2  0000.0000.0011.00-00  <>
+    Leaf-2.00-00                 17  16908  1020    122 L2  0000.0000.0012.00-00  <>
+    Leaf-3.00-00                 16  30411   733    122 L2  0000.0000.0013.00-00  <>
 ```
 
 ---
