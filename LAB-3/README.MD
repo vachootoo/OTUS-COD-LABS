@@ -86,21 +86,11 @@ SPINE-2 Ethernet3 <----> Ethernet2 LEAF-3
 ```text
 UNDERLAY
 ```
-
-Вся фабрика работает только как:
-
-```text
-Level-2
-```
-
-Таким образом, все Spine и Leaf находятся в одном IS-IS Level-2 flooding domain.
-
 Для всех устройств используется одна IS-IS Area:
 
 ```text
 49.0001
 ```
-
 ---
 
 # NET
@@ -171,13 +161,6 @@ LEAF-3  -> 0000.0000.0013
 ```eos
 is-type level-2
 ```
-
-На физических интерфейсах Spine ↔ Leaf также явно указывается:
-
-```eos
-isis circuit-type level-2
-```
-
 Это позволяет использовать фабрику как единый IS-IS backbone.
 
 ---
@@ -191,8 +174,6 @@ isis circuit-type level-2
 ```eos
 isis network point-to-point
 ```
-
-Это позволяет IS-IS рассматривать Ethernet-соединение как point-to-point link.
 
 Пример:
 
