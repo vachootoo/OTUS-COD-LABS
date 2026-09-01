@@ -291,6 +291,82 @@ end
 <summary>Spine-2</summary>
 
 ```
+Spine-2(config)#sh run
+! Command: show running-config
+! device: Spine-2 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Spine-2
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.2.0/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.2.2/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet3
+   no switchport
+   ip address 10.0.2.4/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.2/32
+   isis enable UNDERLAY
+   isis circuit-type level-2
+!
+interface Management1
+!
+ip routing
+!
+router isis UNDERLAY
+   net 49.0001.0000.0000.0002.00
+   is-type level-2
+   !
+   address-family ipv4 unicast
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
 ```
 
 </details>
@@ -299,6 +375,77 @@ end
 <summary>Leaf-1</summary>
 
 ```
+Leaf-1(config)#sh run
+! Command: show running-config
+! device: Leaf-1 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf-1
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.1/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.2.1/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.11/32
+   isis enable UNDERLAY
+   isis circuit-type level-2
+!
+interface Management1
+!
+ip routing
+!
+router isis UNDERLAY
+   net 49.0001.0000.0000.0011.00
+   is-type level-2
+   !
+   address-family ipv4 unicast
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
 ```
 
 </details>
@@ -307,6 +454,77 @@ end
 <summary>Leaf-2</summary>
 
 ```
+Leaf-2(config)#sh run
+! Command: show running-config
+! device: Leaf-2 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf-2
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.3/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.2.3/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.12/32
+   isis enable UNDERLAY
+   isis circuit-type level-2
+!
+interface Management1
+!
+ip routing
+!
+router isis UNDERLAY
+   net 49.0001.0000.0000.0012.00
+   is-type level-2
+   !
+   address-family ipv4 unicast
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
 ```
 
 </details>
@@ -315,15 +533,87 @@ end
 <summary>Leaf-3</summary>
 
 ```
+Leaf-3(config)#sh run
+! Command: show running-config
+ ! device: Leaf-3 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf-3
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   description to Spine-1
+   no switchport
+   ip address 10.0.1.5/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.2.5/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.13/32
+   isis enable UNDERLAY
+   isis circuit-type level-2
+!
+interface Management1
+!
+ip routing
+!
+router isis UNDERLAY
+   net 49.0001.0000.0000.0013.00
+   is-type level-2
+   !
+   address-family ipv4 unicast
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
 ```
 
 </details>
 
 ---
 
-# Проверка IS-IS
+## 5. Проверка IS-IS
 
-## Проверка соседства
+### Проверка соседства
 
 ```eos
 show isis neighbors
@@ -360,7 +650,7 @@ L2
 
 ---
 
-# Проверка интерфейсов IS-IS
+### Проверка интерфейсов IS-IS
 
 ```eos
 show isis interface
@@ -380,7 +670,7 @@ Level 2
 
 ---
 
-# Проверка Link State Database
+### Проверка Link State Database
 
 ```eos
 show isis database
@@ -404,7 +694,7 @@ LEAF-3
 
 ---
 
-# Проверка таблицы маршрутизации
+### Проверка таблицы маршрутизации
 
 ```eos
 show ip route
