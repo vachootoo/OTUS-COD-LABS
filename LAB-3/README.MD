@@ -621,7 +621,7 @@ show isis neighbors
 
 На каждом Spine должно быть три IS-IS соседа.
 
-Например на SPINE-1:
+Например на Spine-1:
 
 ```text
 Spine-1(config)#sh isis neighbors
@@ -760,13 +760,24 @@ Gateway of last resort is not set
 
 С Leaf-1:
 
-```eos
-ping 10.0.0.1 source 10.0.0.11
-ping 10.0.0.2 source 10.0.0.11
-ping 10.0.0.12 source 10.0.0.11
-ping 10.0.0.13 source 10.0.0.11
 ```
-
+Leaf-1(config)#ping 10.255.0.1
+PING 10.255.0.1 (10.255.0.1) 72(100) bytes of data.
+80 bytes from 10.255.0.1: icmp_seq=1 ttl=64 time=14.1 ms
+80 bytes from 10.255.0.1: icmp_seq=2 ttl=64 time=5.09 ms
+80 bytes from 10.255.0.1: icmp_seq=3 ttl=64 time=3.31 ms
+80 bytes from 10.255.0.1: icmp_seq=4 ttl=64 time=2.61 ms
+80 bytes from 10.255.0.1: icmp_seq=5 ttl=64 time=2.35 ms
+```
+```
+Leaf-1(config)#ping 10.255.0.2
+PING 10.255.0.2 (10.255.0.2) 72(100) bytes of data.
+80 bytes from 10.255.0.2: icmp_seq=1 ttl=64 time=9.53 ms
+80 bytes from 10.255.0.2: icmp_seq=2 ttl=64 time=3.49 ms
+80 bytes from 10.255.0.2: icmp_seq=3 ttl=64 time=2.55 ms
+80 bytes from 10.255.0.2: icmp_seq=4 ttl=64 time=2.44 ms
+80 bytes from 10.255.0.2: icmp_seq=5 ttl=64 time=2.59 ms
+```
 С Leaf-2:
 
 ```eos
