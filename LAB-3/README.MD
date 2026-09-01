@@ -624,29 +624,24 @@ show isis neighbors
 Например на SPINE-1:
 
 ```text
-LEAF-1
-LEAF-2
-LEAF-3
+Spine-1(config)#sh isis neighbors
+
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id
+UNDERLAY  default  Leaf-1           L2   Ethernet1          P2P               UP    28          14
+UNDERLAY  default  Leaf-2           L2   Ethernet2          P2P               UP    21          17
+UNDERLAY  default  Leaf-3           L2   Ethernet3          P2P               UP    22          15
 ```
 
 На каждом Leaf должно быть два соседа:
 
 ```text
-SPINE-1
-SPINE-2
+Leaf-1(config)#sh isis neighbors
+
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id
+UNDERLAY  default  Spine-1          L2   Ethernet1          P2P               UP    29          19
+UNDERLAY  default  Spine-2          L2   Ethernet2          P2P               UP    29          15
 ```
 
-Все adjacency должны находиться в состоянии:
-
-```text
-UP
-```
-
-и иметь тип:
-
-```text
-L2
-```
 
 ---
 
