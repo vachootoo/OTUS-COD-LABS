@@ -778,14 +778,23 @@ PING 10.255.0.2 (10.255.0.2) 72(100) bytes of data.
 80 bytes from 10.255.0.2: icmp_seq=4 ttl=64 time=2.44 ms
 80 bytes from 10.255.0.2: icmp_seq=5 ttl=64 time=2.59 ms
 ```
-С Leaf-2:
-
-```eos
-ping 10.0.0.1 source 10.0.0.12
-ping 10.0.0.2 source 10.0.0.12
-ping 10.0.0.11 source 10.0.0.12
-ping 10.0.0.13 source 10.0.0.12
 ```
-
+Leaf-1(config)#ping 10.255.0.12
+PING 10.255.0.12 (10.255.0.12) 72(100) bytes of data.
+80 bytes from 10.255.0.12: icmp_seq=1 ttl=63 time=12.0 ms
+80 bytes from 10.255.0.12: icmp_seq=2 ttl=63 time=4.98 ms
+80 bytes from 10.255.0.12: icmp_seq=3 ttl=63 time=4.79 ms
+80 bytes from 10.255.0.12: icmp_seq=4 ttl=63 time=5.51 ms
+80 bytes from 10.255.0.12: icmp_seq=5 ttl=63 time=6.39 ms
+```
+```
+Leaf-1(config)#ping 10.255.0.13
+PING 10.255.0.13 (10.255.0.13) 72(100) bytes of data.
+80 bytes from 10.255.0.13: icmp_seq=1 ttl=63 time=15.6 ms
+80 bytes from 10.255.0.13: icmp_seq=2 ttl=63 time=9.98 ms
+80 bytes from 10.255.0.13: icmp_seq=3 ttl=63 time=10.9 ms
+80 bytes from 10.255.0.13: icmp_seq=4 ttl=63 time=8.22 ms
+80 bytes from 10.255.0.13: icmp_seq=5 ttl=63 time=9.78 ms
+```
 ---
 
