@@ -651,17 +651,57 @@ UNDERLAY  default  Spine-2          L2   Ethernet2          P2P               UP
 show isis interface
 ```
 
-Физические интерфейсы должны отображаться как:
 
 ```text
-Type: point-to-point
+Leaf-1(config)#show isis interface
+
+IS-IS Instance: **UNDERLAY** VRF: default
+
+  Interface Loopback0:
+    Index: 11 SNPA: 0:0:0:0:0:0
+    MTU: 65532 Type: loopback
+    Supported address families: IPv4
+    Area proxy boundary is disabled
+    BFD IPv4 is disabled
+    BFD IPv6 is disabled
+    Hello padding is enabled
+    **Level 2:**
+      Metric: 10 (passive interface)
+      Authentication mode: None
+      TI-LFA protection is disabled for IPv4
+      TI-LFA protection is disabled for IPv6
+  Interface Ethernet1:
+    Index: 20 SNPA: P2P
+    MTU: 1497 Type: **point-to-point**
+    Supported address families: IPv4
+    Area proxy boundary is disabled
+    Speed: 1000 mbps
+    BFD IPv4 is disabled
+    BFD IPv6 is disabled
+    Hello padding is enabled
+    **Level 2:**
+      Metric: 10, Number of adjacencies: 1
+      Link-ID: 14
+      Authentication mode: None
+      TI-LFA protection is disabled for IPv4
+      TI-LFA protection is disabled for IPv6
+  Interface Ethernet2:
+    Index: 22 SNPA: P2P
+    MTU: 1497 Type: **point-to-point**
+    Supported address families: IPv4
+    Area proxy boundary is disabled
+    Speed: 1000 mbps
+    BFD IPv4 is disabled
+    BFD IPv6 is disabled
+    Hello padding is enabled
+    **Level 2:**
+      Metric: 10, Number of adjacencies: 1
+      Link-ID: 16
+      Authentication mode: None
+      TI-LFA protection is disabled for IPv4
+      TI-LFA protection is disabled for IPv6
 ```
 
-и работать на:
-
-```text
-Level 2
-```
 
 ---
 
