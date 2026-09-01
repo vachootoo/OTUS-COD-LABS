@@ -203,7 +203,121 @@ interface Loopback0
 
 ## 5. Конфигурация оборудования
 
+<details>
+<summary>Spine-1</summary>
 
+```
+Spine-1(config)#sh run
+! Command: show running-config
+! device: Spine-1 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Spine-1
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.0/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.1.2/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet3
+   no switchport
+   ip address 10.0.1.4/31
+   isis enable UNDERLAY
+   isis circuit-type level-2
+   isis network point-to-point
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.1/32
+   isis enable UNDERLAY
+   isis circuit-type level-2
+!
+interface Management1
+!
+ip routing
+!
+router isis UNDERLAY
+   net 49.0001.0000.0000.0001.00
+   is-type level-2
+   !
+   address-family ipv4 unicast
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+```
+
+</details>
+
+<details>
+<summary>Spine-2</summary>
+
+```
+```
+
+</details>
+
+<details>
+<summary>Leaf-1</summary>
+
+```
+```
+
+</details>
+
+<details>
+<summary>Leaf-2</summary>
+
+```
+```
+
+</details>
+
+<details>
+<summary>Leaf-3</summary>
+
+```
+```
+
+</details>
 
 ---
 
