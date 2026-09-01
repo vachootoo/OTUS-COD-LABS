@@ -703,28 +703,62 @@ IS-IS Instance: UNDERLAY VRF: default
 show ip route
 ```
 
-Маршруты, полученные через IS-IS Level-2, отображаются с кодом:
+
+Например на Leaf-1 должны присутствовать маршруты к Loopback:
 
 ```text
-I L2
-```
+Leaf-1(config)#show ip route
 
-Например на LEAF-1 должны присутствовать маршруты к Loopback:
+VRF: default
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
 
-```text
-10.0.0.1/32
-10.0.0.2/32
-10.0.0.12/32
-10.0.0.13/32
+Gateway of last resort is not set
+
+ C        10.0.1.0/31
+           directly connected, Ethernet1
+ I L2     10.0.1.2/31 [115/20]
+           via 10.0.1.0, Ethernet1
+ I L2     10.0.1.4/31 [115/20]
+           via 10.0.1.0, Ethernet1
+ C        10.0.2.0/31
+           directly connected, Ethernet2
+ I L2     10.0.2.2/31 [115/20]
+           via 10.0.2.0, Ethernet2
+ I L2     10.0.2.4/31 [115/20]
+           via 10.0.2.0, Ethernet2
+ I L2     10.255.0.1/32 [115/20]
+           via 10.0.1.0, Ethernet1
+ I L2     10.255.0.2/32 [115/20]
+           via 10.0.2.0, Ethernet2
+ C        10.255.0.11/32
+           directly connected, Loopback0
+ I L2     10.255.0.12/32 [115/30]
+           via 10.0.1.0, Ethernet1
+           via 10.0.2.0, Ethernet2
+ I L2     10.255.0.13/32 [115/30]
+           via 10.0.1.0, Ethernet1
+           via 10.0.2.0, Ethernet2
 ```
 
 ---
 
-# Проверка связности
+### Проверка связности
 
 Проверяем доступность Loopback-интерфейсов.
 
-С LEAF-1:
+С Leaf-1:
 
 ```eos
 ping 10.0.0.1 source 10.0.0.11
@@ -733,7 +767,7 @@ ping 10.0.0.12 source 10.0.0.11
 ping 10.0.0.13 source 10.0.0.11
 ```
 
-С LEAF-2:
+С Leaf-2:
 
 ```eos
 ping 10.0.0.1 source 10.0.0.12
@@ -743,23 +777,4 @@ ping 10.0.0.13 source 10.0.0.12
 ```
 
 ---
-
-# Итог
-
-В результате построен IPv4 Underlay на базе IS-IS.
-
-Используемая архитектура:
-
-```text
-IGP:               IS-IS
-IS-IS Instance:    UNDERLAY
-IS-IS Level:       Level-2
-IS-IS Area:        49.0001
-
-Loopback pool:      10.0.0.0/24
-P2P pool:           10.0.1.0/24
-
-Loopback prefix:    /32
-P2P prefix:         /31
-```
 
