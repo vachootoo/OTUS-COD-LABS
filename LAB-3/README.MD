@@ -194,18 +194,10 @@ Loopback0 также необходимо добавить в IS-IS:
 
 ```eos
 interface Loopback0
-   ip address 10.0.0.1/32
+   ip address 10.255.0.1/32
    isis enable UNDERLAY
    isis passive
 ```
-
-Команда:
-
-```eos
-isis passive
-```
-
-запрещает формирование IS-IS adjacency через Loopback-интерфейс, но его IPv4 prefix продолжает распространяться через IS-IS.
 
 ---
 
