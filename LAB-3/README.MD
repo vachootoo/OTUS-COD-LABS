@@ -93,7 +93,7 @@ UNDERLAY
 ```
 ---
 
-# NET
+**NET**
 
 В отличие от OSPF, IS-IS не использует Router ID в качестве основного идентификатора IS-IS маршрутизатора.
 
@@ -154,7 +154,7 @@ LEAF-3  -> 0000.0000.0013
 
 ---
 
-# IS-IS Level
+**IS-IS Level**
 
 На всех устройствах используется только:
 
@@ -165,7 +165,7 @@ is-type level-2
 
 ---
 
-# IS-IS Point-to-Point
+**IS-IS Point-to-Point**
 
 Физические соединения Spine ↔ Leaf являются point-to-point.
 
@@ -188,7 +188,7 @@ interface Ethernet1
 
 ---
 
-# Loopback
+**Loopback**
 
 Loopback0 также необходимо добавить в IS-IS:
 
