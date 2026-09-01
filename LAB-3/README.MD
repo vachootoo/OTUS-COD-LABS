@@ -63,18 +63,6 @@
 
 ![схема сети](isis-clos-scheme.png)
 
-Физические соединения:
-
-```text
-SPINE-1 Ethernet1 <----> Ethernet1 LEAF-1
-SPINE-1 Ethernet2 <----> Ethernet1 LEAF-2
-SPINE-1 Ethernet3 <----> Ethernet1 LEAF-3
-
-SPINE-2 Ethernet1 <----> Ethernet2 LEAF-1
-SPINE-2 Ethernet2 <----> Ethernet2 LEAF-2
-SPINE-2 Ethernet3 <----> Ethernet2 LEAF-3
-```
-
 ---
 
 ## 4. IS-IS
