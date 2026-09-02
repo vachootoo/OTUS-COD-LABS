@@ -1334,3 +1334,30 @@ end
 ```
 
 </details>
+
+### Проверка
+```
+Spine-1(config)#sh bfd peers
+VRF name: default
+-----------------
+DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp
+--------- ----------- ----------- -------------------- ------- ----------------
+10.0.1.1  3551027779  2389349378        Ethernet1(25)  normal   09/02/26 10:25
+10.0.1.3  1038953095  2872589125        Ethernet2(23)  normal   09/02/26 10:38
+10.0.1.5  3049631847  2068491003        Ethernet3(24)  normal   09/02/26 10:38
+
+   LastDown            LastDiag    State
+-------------- ------------------- -----
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+         NA       No Diagnostic       Up
+```
+
+```
+Spine-1(config)#sh isis neighbors
+
+Instance  VRF      System Id        Type Interface          SNPA              State Hold time   Circuit Id
+UNDERLAY  default  Leaf-1           L2   Ethernet1          P2P               UP    27          14
+UNDERLAY  default  Leaf-2           L2   Ethernet2          P2P               UP    28          17
+UNDERLAY  default  Leaf-3           L2   Ethernet3          P2P               UP    28          15
+```
