@@ -833,9 +833,20 @@ BFD (Bidirectional Forwarding Detection) с протоколом IS-IS нужн�
 Аутентификация в  ISIS - нужна для защиты от злоумышленников и ошибок администрирования сети.
 
 Конфигурация для BFD - добавляем на каждом интерфейсе ISIS:
+
 ```
 interface Ethernet1
    bfd interval 300 min-rx 300 multiplier 5
    isis bfd
    
+```
+
+```
+interval 300
+```
+```
+min-rx 300
+```
+```
+multiplier 5
 ```
