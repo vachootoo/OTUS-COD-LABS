@@ -852,6 +852,22 @@ min-rx 300
 ```
 multiplier 5
 ```
+### Аутентификация
+
+Глобально:
+```
+router isis UNDERLAY
+ authentication mode md5
+ authentication key MyGlobalSecretKey
+```
+На интерфейсах:
+```
+Interface Ethernet 1
+ isis authentication mode md5
+ isis authentication key MyInterfaceSecretKey
+
+```
+
 ### Конфигурация устройств
 
 <details>
