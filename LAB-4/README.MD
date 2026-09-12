@@ -329,7 +329,76 @@ end
 <summary>Leaf-2</summary>
 
 ```
-
+Leaf-2(config)#    sh run
+! Command: show running-config
+! device: Leaf-2 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf-2
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.3/31
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.2.3/31
+!
+interface Ethernet3
+   no switchport
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.12/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65102
+   router-id 10.255.0.12
+   timers bgp 3 9
+   maximum-paths 2
+   neighbor 10.0.1.2 remote-as 65000
+   neighbor 10.0.1.2 bfd
+   neighbor 10.0.1.2 description Spine-1
+   neighbor 10.0.2.2 remote-as 65000
+   neighbor 10.0.2.2 bfd
+   neighbor 10.0.2.2 description Spine-2
+   network 10.255.0.12/32
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
 ```
 
 </details>
@@ -338,7 +407,74 @@ end
 <summary>Leaf-3</summary>
 
 ```
-
+Leaf-3(config)#sh run
+! Command: show running-config
+! device: Leaf-3 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf-3
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.5/31
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.2.5/31
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.13/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65103
+   router-id 10.255.0.13
+   timers bgp 3 9
+   neighbor 10.0.1.4 remote-as 65000
+   neighbor 10.0.1.4 bfd
+   neighbor 10.0.1.4 description Spine-1
+   neighbor 10.0.2.4 remote-as 65000
+   neighbor 10.0.2.4 bfd
+   neighbor 10.0.2.4 description Spine-2
+   network 10.255.0.13/32
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
 ```
 
 </details>
