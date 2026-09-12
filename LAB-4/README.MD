@@ -510,6 +510,86 @@ Neighbor Status Codes: m - Under maintenance
   Leaf-2                   10.0.2.3 4 65102          27165     27178    0    0 11:14:35 Estab   1      1
   Leaf-3                   10.0.2.5 4 65103          27052     27004    0    0 05:53:20 Estab   1      1
 ```
+Проверим ECMP:
+
+Leaf-1:
+```
+Leaf-1(config-router-bgp)#sh ip bgp
+BGP routing table information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+Route status codes: s - suppressed contributor, * - valid, > - active, E - ECMP head, e - ECMP
+                    S - Stale, c - Contributing to ECMP, b - backup, L - labeled-unicast
+                    % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI Origin Validation codes: V - valid, I - invalid, U - unknown
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  AIGP       LocPref Weight  Path
+ * >      10.255.0.1/32          10.0.1.0              0       -          100     0       65000 i
+ * >      10.255.0.2/32          10.0.2.0              0       -          100     0       65000 i
+ * >      10.255.0.11/32         -                     -       -          -       0       i
+ * >Ec    10.255.0.12/32         10.0.1.0              0       -          100     0       65000 65102 i
+ *  ec    10.255.0.12/32         10.0.2.0              0       -          100     0       65000 65102 i
+ * >Ec    10.255.0.13/32         10.0.1.0              0       -          100     0       65000 65103 i
+ *  ec    10.255.0.13/32         10.0.2.0
+```
+```
+Leaf-1(config)#sh ip route
+
+VRF: default
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+Gateway of last resort is not set
+
+ C        10.0.1.0/31
+           directly connected, Ethernet1
+ C        10.0.2.0/31
+           directly connected, Ethernet2
+ B E      10.255.0.1/32 [200/0]
+           via 10.0.1.0, Ethernet1
+ B E      10.255.0.2/32 [200/0]
+           via 10.0.2.0, Ethernet2
+ C        10.255.0.11/32
+           directly connected, Loopback0
+ B E      10.255.0.12/32 [200/0]
+           via 10.0.1.0, Ethernet1
+           via 10.0.2.0, Ethernet2
+ B E      10.255.0.13/32 [200/0]
+           via 10.0.1.0, Ethernet1
+           via 10.0.2.0, Ethernet2
+```
+Проверим BFD:
+
+Например на  Spine-2:
+```
+Spine-2#sh bfd peers
+VRF name: default
+-----------------
+DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp
+--------- ----------- ----------- -------------------- ------- ----------------
+10.0.2.1   477553134    42040934        Ethernet1(17)  normal   09/12/26 09:43
+10.0.2.3   536474471    80937991        Ethernet2(16)  normal   09/11/26 22:50
+10.0.2.5  2580779609  1022682620        Ethernet3(18)  normal   09/12/26 09:47
+
+         LastDown            LastDiag    State
+-------------------- ------------------- -----
+   09/12/26 07:34       No Diagnostic       Up
+   09/11/26 22:50       No Diagnostic       Up
+   09/12/26 04:06       No Diagnostic       Up
+```
+
 ## 7. Полезные команды для troubleshooting
 
 ```
