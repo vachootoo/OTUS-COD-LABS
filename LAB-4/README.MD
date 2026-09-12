@@ -63,4 +63,10 @@ neighbor <IP> remote-as <ASN>
 ```
 network 10.255.0.1/32
 ```
+Для исключения path-hunting для Spine используются одинаковые номера ASN.
+
+Если использовать разные номера ASN, то для BGP ECMP тогда может потребоваться дополнительная настройка:
+```
+bgp bestpath as-path multipath-relax
+```
 
