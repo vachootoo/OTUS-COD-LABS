@@ -589,7 +589,7 @@ DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp
    09/11/26 22:50       No Diagnostic       Up
    09/12/26 04:06       No Diagnostic       Up
 ```
-**Проверка доступности Loopback**
+**Проверка доступности Loopback:**
 ```
 Spine-1#ping 10.255.0.11
 PING 10.255.0.11 (10.255.0.11) 72(100) bytes of data.
