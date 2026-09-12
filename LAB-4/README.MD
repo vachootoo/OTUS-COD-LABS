@@ -64,6 +64,7 @@ neighbor <IP> remote-as <ASN>
 network 10.255.0.1/32
 ```
 Для исключения path-hunting для Spine используются **одинаковые номера ASN**.
+
 Если назначить:
 ```
 Spine-1 AS65001
