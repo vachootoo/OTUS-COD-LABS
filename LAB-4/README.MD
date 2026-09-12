@@ -498,7 +498,18 @@ Neighbor Status Codes: m - Under maintenance
   Leaf-2                   10.0.1.3 4 65102          16577     16570    0    0 11:44:40 Estab   1      1
   Leaf-3                   10.0.1.5 4 65103           8965      8939    0    0 00:15:50 Estab   1      1
 ```
+Spine-2
 
+```
+Spine-2#sh ip bgp summary
+BGP summary information for VRF default
+Router identifier 10.255.0.2, local AS number 65000
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+  Leaf-1                   10.0.2.1 4 65101          26890     26913    0    0 02:18:57 Estab   1      1
+  Leaf-2                   10.0.2.3 4 65102          27165     27178    0    0 11:14:35 Estab   1      1
+  Leaf-3                   10.0.2.5 4 65103          27052     27004    0    0 05:53:20 Estab   1      1
+```
 ## 7. Полезные команды для troubleshooting
 
 ```
