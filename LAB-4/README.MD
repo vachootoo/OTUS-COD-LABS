@@ -51,7 +51,7 @@
 
 ## 3. Схема сети
 
-![схема сети](Clos-BGP-Scheme.png)
+![схема сети](Clos_BGP_Scheme.png)
 
 ---
 
