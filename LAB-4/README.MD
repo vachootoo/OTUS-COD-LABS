@@ -510,7 +510,7 @@ Neighbor Status Codes: m - Under maintenance
   Leaf-2                   10.0.2.3 4 65102          27165     27178    0    0 11:14:35 Estab   1      1
   Leaf-3                   10.0.2.5 4 65103          27052     27004    0    0 05:53:20 Estab   1      1
 ```
-Проверим ECMP:
+**Проверим ECMP:**
 
 Leaf-1:
 ```
@@ -570,7 +570,7 @@ Gateway of last resort is not set
            via 10.0.1.0, Ethernet1
            via 10.0.2.0, Ethernet2
 ```
-Проверим BFD:
+***Проверим BFD:***
 
 Например на  Spine-2:
 ```
@@ -588,6 +588,42 @@ DstAddr       MyDisc    YourDisc  Interface/Transport    Type           LastUp
    09/12/26 07:34       No Diagnostic       Up
    09/11/26 22:50       No Diagnostic       Up
    09/12/26 04:06       No Diagnostic       Up
+```
+**Проверка доступности Loopback**
+```
+Spine-1#ping 10.255.0.11
+PING 10.255.0.11 (10.255.0.11) 72(100) bytes of data.
+80 bytes from 10.255.0.11: icmp_seq=1 ttl=64 time=2.96 ms
+80 bytes from 10.255.0.11: icmp_seq=2 ttl=64 time=1.71 ms
+80 bytes from 10.255.0.11: icmp_seq=3 ttl=64 time=1.27 ms
+80 bytes from 10.255.0.11: icmp_seq=4 ttl=64 time=1.88 ms
+80 bytes from 10.255.0.11: icmp_seq=5 ttl=64 time=1.58 ms
+
+--- 10.255.0.11 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 16ms
+rtt min/avg/max/mdev = 1.272/1.880/2.960/0.575 ms, ipg/ewma 3.952/2.403 ms
+Spine-1#ping 10.255.0.12
+PING 10.255.0.12 (10.255.0.12) 72(100) bytes of data.
+80 bytes from 10.255.0.12: icmp_seq=1 ttl=64 time=2.79 ms
+80 bytes from 10.255.0.12: icmp_seq=2 ttl=64 time=2.24 ms
+80 bytes from 10.255.0.12: icmp_seq=3 ttl=64 time=1.61 ms
+80 bytes from 10.255.0.12: icmp_seq=4 ttl=64 time=1.92 ms
+80 bytes from 10.255.0.12: icmp_seq=5 ttl=64 time=1.63 ms
+
+--- 10.255.0.12 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 12ms
+rtt min/avg/max/mdev = 1.610/2.037/2.793/0.441 ms, ipg/ewma 3.000/2.392 ms
+Spine-1#ping 10.255.0.13
+PING 10.255.0.13 (10.255.0.13) 72(100) bytes of data.
+80 bytes from 10.255.0.13: icmp_seq=1 ttl=64 time=4.03 ms
+80 bytes from 10.255.0.13: icmp_seq=2 ttl=64 time=1.28 ms
+80 bytes from 10.255.0.13: icmp_seq=3 ttl=64 time=1.55 ms
+80 bytes from 10.255.0.13: icmp_seq=4 ttl=64 time=1.35 ms
+80 bytes from 10.255.0.13: icmp_seq=5 ttl=64 time=1.62 ms
+
+--- 10.255.0.13 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 14ms
+rtt min/avg/max/mdev = 1.281/1.966/4.028/1.038 ms, ipg/ewma 3.542/2.967 ms
 ```
 
 ## 7. Полезные команды для troubleshooting
