@@ -84,8 +84,19 @@ AS-PATH будут отличаться.
 
 Если использовать разные номера ASN, то для BGP ECMP тогда может потребоваться дополнительная настройка:
 ```
-bgp bestpath as-path multipath-relax
+bgp bestpath as-path multi path-relax
 ```
+для включения ECMP используем команду:
+```
+ maximum-paths 4
+```
+Обязательно используем BFD и уменьшаем таймеры:
+
+```
+timers bgp 3 9
+neighbor 10.0.1.1 bfd
+```
+
 ## 5. Конфигурация оборудования
 
 <details>
