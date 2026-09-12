@@ -146,10 +146,13 @@ ip routing
 router bgp 65000
    router-id 10.255.0.1
    neighbor 10.0.1.1 remote-as 65101
+   neighbor 10.0.1.1 bfd
    neighbor 10.0.1.1 description Leaf-1
    neighbor 10.0.1.3 remote-as 65102
+   neighbor 10.0.1.3 bfd
    neighbor 10.0.1.3 description Leaf-2
    neighbor 10.0.1.5 remote-as 65103
+   neighbor 10.0.1.5 bfd
    neighbor 10.0.1.5 description Leaf-3
    network 10.255.0.1/32
 !
