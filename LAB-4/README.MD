@@ -145,6 +145,8 @@ ip routing
 !
 router bgp 65000
    router-id 10.255.0.1
+   timers bgp 3 9
+   maximum-paths 2
    neighbor 10.0.1.1 remote-as 65101
    neighbor 10.0.1.1 bfd
    neighbor 10.0.1.1 description Leaf-1
@@ -226,6 +228,7 @@ ip routing
 router bgp 65000
    router-id 10.255.0.2
    timers bgp 3 9
+   maximum-paths 2
    neighbor 10.0.2.1 remote-as 65101
    neighbor 10.0.2.1 bfd
    neighbor 10.0.2.1 description Leaf-1
@@ -305,6 +308,7 @@ ip routing
 router bgp 65101
    router-id 10.255.0.11
    timers bgp 3 9
+   maximum-paths 2
    neighbor 10.0.1.0 remote-as 65000
    neighbor 10.0.1.0 bfd
    neighbor 10.0.1.0 description Spine-1
@@ -459,6 +463,7 @@ ip routing
 router bgp 65103
    router-id 10.255.0.13
    timers bgp 3 9
+   maximum-paths 2
    neighbor 10.0.1.4 remote-as 65000
    neighbor 10.0.1.4 bfd
    neighbor 10.0.1.4 description Spine-1
