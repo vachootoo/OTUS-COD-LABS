@@ -22,8 +22,8 @@
 
 Каждому устройству назначается уникальный `/32` адрес на интерфейсе `Loopback0`. Так же назначаем номер автономной системы ASN.
 
-| Device | Interface | IP address |
-|---|---|---|
+| Device | Interface | IP address | ASN |
+|---|---|---|---|
 | Spine-1 | Loopback0 | `10.255.0.1/32` | ASN 65000 |
 | Spine-2 | Loopback0 | `10.255.0.2/32` | ASN 65000 |
 | Leaf-1 | Loopback0 | `10.255.0.11/32` | ASN 65101 |
