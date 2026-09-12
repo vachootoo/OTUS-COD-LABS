@@ -27,7 +27,7 @@
 | Spine-1 | Loopback0 | `10.255.0.1/32` | ASN 65000 |
 | Spine-2 | Loopback0 | `10.255.0.2/32` | ASN 65000 |
 | Leaf-1 | Loopback0 | `10.255.0.11/32` | ASN 65101 |
-| Leaf-2 | Loopback0 | `10.255.0.12/32` |.ASN 65102 |
+| Leaf-2 | Loopback0 | `10.255.0.12/32` | ASN 65102 |
 | Leaf-3 | Loopback0 | `10.255.0.13/32` | ASN 65103 |
 
 ---
