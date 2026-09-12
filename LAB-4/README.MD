@@ -61,6 +61,6 @@ neighbor <IP> remote-as <ASN>
 ```
 Через BGP будем распространять только Loopback0:
 ```
-network 10.255.0.1
+network 10.255.0.1/32
 ```
 
