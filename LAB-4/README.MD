@@ -86,7 +86,7 @@ AS-PATH будут отличаться.
 ```
 bgp bestpath as-path multipath-relax
 ```
-## 4. Конфигурация оборудования
+## 5. Конфигурация оборудования
 
 <details>
 <summary>Spine-1</summary>
@@ -484,4 +484,21 @@ end
 
 </details>
 
+## 6. Проверка
+## 7. Полезные команды для trableshooting
 
+```
+show ip interface brief
+show ip bgp summary
+show ip bgp
+show ip route bgp
+show ip bgp neighbors
+show ip bgp neighbors <neighbor-ip> received-routes
+show ip bgp neighbors <neighbor-ip> advertised-routes
+show ip route <loopback-ip>
+show ip bgp <loopback-ip>/32
+ping <remote-loopback> source <local-loopback>
+traceroute <remote-loopback> source <local-loopback>
+При использовании BFD:
+show bfd peers
+```
