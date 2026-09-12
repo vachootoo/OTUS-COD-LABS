@@ -90,7 +90,7 @@ bgp bestpath as-path multi path-relax
 ```
  maximum-paths 4
 ```
-Обязательно используем BFD и уменьшаем таймеры:
+Обязательно используем BFD и уменьшаем таймеры(по умолчанию 60 180):
 
 ```
 timers bgp 3 9
@@ -157,7 +157,7 @@ ip routing
 router bgp 65000
    router-id 10.255.0.1
    timers bgp 3 9
-   maximum-paths 2
+   maximum-paths 4
    neighbor 10.0.1.1 remote-as 65101
    neighbor 10.0.1.1 bfd
    neighbor 10.0.1.1 description Leaf-1
@@ -239,7 +239,7 @@ ip routing
 router bgp 65000
    router-id 10.255.0.2
    timers bgp 3 9
-   maximum-paths 2
+   maximum-paths 4
    neighbor 10.0.2.1 remote-as 65101
    neighbor 10.0.2.1 bfd
    neighbor 10.0.2.1 description Leaf-1
@@ -319,7 +319,7 @@ ip routing
 router bgp 65101
    router-id 10.255.0.11
    timers bgp 3 9
-   maximum-paths 2
+   maximum-paths 4
    neighbor 10.0.1.0 remote-as 65000
    neighbor 10.0.1.0 bfd
    neighbor 10.0.1.0 description Spine-1
@@ -397,7 +397,7 @@ ip routing
 router bgp 65102
    router-id 10.255.0.12
    timers bgp 3 9
-   maximum-paths 2
+   maximum-paths 4
    neighbor 10.0.1.2 remote-as 65000
    neighbor 10.0.1.2 bfd
    neighbor 10.0.1.2 description Spine-1
@@ -474,7 +474,7 @@ ip routing
 router bgp 65103
    router-id 10.255.0.13
    timers bgp 3 9
-   maximum-paths 2
+   maximum-paths 4
    neighbor 10.0.1.4 remote-as 65000
    neighbor 10.0.1.4 bfd
    neighbor 10.0.1.4 description Spine-1
