@@ -485,7 +485,7 @@ end
 </details>
 
 ## 6. Проверка
-## 7. Полезные команды для trableshooting
+## 7. Полезные команды для troubleshooting
 
 ```
 show ip interface brief
