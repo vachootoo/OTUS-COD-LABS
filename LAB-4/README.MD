@@ -2,7 +2,7 @@
 
 ## 1. Цель работы
 
-Настроить eBGP в качестве Underlay routing protocol для Leaf-Spine фабрики на оборудовании Arista EOS.
+Настроить eBGP в качестве Underlay протокола для Leaf-Spine фабрики на оборудовании Arista EOS.
 Топология состоит из:
 - 2 Spine
 - 3 Leaf
