@@ -250,7 +250,83 @@ end
 </details>
 
 <details>
-<summary>Spine-1</summary>
+<summary>Leaf-1</summary>
+
+```
+Leaf-1(config)#sh run
+! Command: show running-config
+! device: Leaf-1 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname Leaf-1
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   no switchport
+   ip address 10.0.1.1/31
+!
+interface Ethernet2
+   no switchport
+   ip address 10.0.2.1/31
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.255.0.11/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65101
+   router-id 10.255.0.11
+   timers bgp 3 9
+   neighbor 10.0.1.0 remote-as 65000
+   neighbor 10.0.1.0 bfd
+   neighbor 10.0.1.0 description Spine-1
+   neighbor 10.0.2.0 remote-as 65000
+   neighbor 10.0.2.0 bfd
+   neighbor 10.0.2.0 description Spine-2
+   network 10.255.0.11/32
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+```
+
+</details>
+
+<details>
+<summary>Leaf-2</summary>
 
 ```
 
@@ -259,16 +335,7 @@ end
 </details>
 
 <details>
-<summary>Spine-1</summary>
-
-```
-
-```
-
-</details>
-
-<details>
-<summary>Spine-1</summary>
+<summary>Leaf-3</summary>
 
 ```
 
