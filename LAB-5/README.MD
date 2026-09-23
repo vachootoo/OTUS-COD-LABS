@@ -707,6 +707,41 @@ end
 
 ## 7. Проверка
 
+```
+Leaf-1#show bgp summary
+BGP summary information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+Neighbor            AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+---------- ----------- ------------- ----------------------- -------------- ---------- ----------
+10.0.1.0         65000 Established   IPv4 Unicast            Negotiated              3          3
+10.0.2.0         65000 Established   IPv4 Unicast            Negotiated              3          3
+10.255.0.1       65000 Established   L2VPN EVPN              Negotiated              3          3
+10.255.0.2       65000 Established   L2VPN EVPN              Negotiated              3          3
+```
+```
+Leaf-2#sh bgp summary
+BGP summary information for VRF default
+Router identifier 10.255.0.12, local AS number 65102
+Neighbor            AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+---------- ----------- ------------- ----------------------- -------------- ---------- ----------
+10.0.1.2         65000 Established   IPv4 Unicast            Negotiated              3          3
+10.0.2.2         65000 Established   IPv4 Unicast            Negotiated              3          3
+10.255.0.1       65000 Established   L2VPN EVPN              Negotiated              2          2
+10.255.0.2       65000 Established   L2VPN EVPN              Negotiated              2          2
+```
+```
+Leaf-3#sh bgp summary
+BGP summary information for VRF default
+Router identifier 10.255.0.13, local AS number 65103
+Neighbor            AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+---------- ----------- ------------- ----------------------- -------------- ---------- ----------
+10.0.1.4         65000 Established   IPv4 Unicast            Negotiated              3          3
+10.0.2.4         65000 Established   IPv4 Unicast            Negotiated              3          3
+10.255.0.1       65000 Established   L2VPN EVPN              Negotiated              2          2
+10.255.0.2       65000 Established   L2VPN EVPN              Negotiated              2          2
+```
+
+
 На клиентах зададим адреса:
 ```
 172.16.10.1
@@ -714,3 +749,5 @@ end
 172.16.10.3
 172.16.10.4
 ```
+
+
