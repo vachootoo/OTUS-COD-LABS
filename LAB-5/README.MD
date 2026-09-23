@@ -91,6 +91,133 @@ service routing protocols model multi-agent
 
 Проверяем наличие этой настройки на всех Leaf и Spine.
 
+###  3. Создание клиентского VLAN
+
+Создаём клиентский VLAN:
+```
+VLAN 10
+```
+
+### 4. Назначение VNI
+
+Каждому VLAN назначается VXLAN Network Identifier.
+Для VLAN 10 используется:
+```
+VNI 10010
+```
+VNI идентифицирует L2 broadcast domain внутри VXLAN Overlay.
+Этап 5. Создание VTEP
+На каждом Leaf создаётся VXLAN Tunnel Endpoint.
+В качестве VTEP используется Loopback0:
+LEAF-1 -> 10.255.0.11
+LEAF-2 -> 10.255.0.12
+LEAF-3 -> 10.255.0.13
+Spine VTEP не являются.
+Этап 6. Настройка VXLAN интерфейса
+На каждом Leaf создаётся логический интерфейс:
+Vxlan1
+В нём указываются:
+source-interface Loopback0;
+UDP port 4789;
+соответствие VLAN и VNI.
+Логически:
+VLAN 10
+   |
+   v
+VNI 10010
+   |
+   v
+Vxlan1
+   |
+   v
+Loopback0
+Этап 7. Настройка EVPN BGP Overlay
+Между Loopback0 Leaf и Spine создаются отдельные BGP-сессии для EVPN.
+Underlay:
+Physical Interface
+      |
+      v
+eBGP IPv4
+Overlay:
+Loopback0
+      |
+      v
+eBGP Multihop
+      |
+      v
+Address Family EVPN
+Таким образом Underlay и Overlay используют один BGP-процесс, но разные соседства и разные Address Family.
+Этап 8. Настройка RD и RT
+Для каждого L2 VNI задаются:
+RD
+RT
+RD должен быть уникальным.
+Используем:
+LEAF-1:
+10.255.0.11:10010
+
+LEAF-2:
+10.255.0.12:10010
+
+LEAF-3:
+10.255.0.13:10010
+RT одинаковый для всех Leaf одного L2-сервиса:
+65000:10010
+Этап 9. Включение распространения MAC
+На Leaf включается экспорт динамически изученных MAC-адресов в EVPN.
+После этого локально изученный MAC может быть передан другим Leaf через MP-BGP EVPN.
+Этап 10. Проверка EVPN Type-3
+После поднятия EVPN каждый VTEP должен сообщить об участии в VNI 10010.
+Проверяем EVPN Type-3 IMET.
+В результате каждый Leaf должен узнать остальные VTEP:
+LEAF-1 знает:
+10.255.0.12
+10.255.0.13
+
+LEAF-2 знает:
+10.255.0.11
+10.255.0.13
+
+LEAF-3 знает:
+10.255.0.11
+10.255.0.12
+Этап 11. Проверка BUM-трафика
+Проверяем передачу:
+Broadcast
+Unknown Unicast
+Multicast
+через Ingress Replication.
+Например ARP Broadcast от LEAF-1 должен быть отправлен всем удалённым VTEP VNI 10010.
+Этап 12. Проверка EVPN Type-2
+После появления клиентского трафика Leaf начинают изучать MAC-адреса клиентов.
+Эти MAC распространяются через EVPN Type-2.
+Проверяем соответствие:
+MAC
+ |
+ v
+Remote VTEP
+Этап 13. Проверка Data Plane
+После изучения MAC проверяем, что обычный unicast-трафик передаётся:
+Client
+   |
+ Leaf
+   |
+ VXLAN
+   |
+ IP Underlay
+   |
+ Leaf
+   |
+ Client
+Этап 14. Проверка отказоустойчивости
+Проверяем работу Overlay при отказе одного Spine.
+Так как VTEP-достижимость обеспечивается Underlay с ECMP:
+LEAF-1
+   |
+   +--- SPINE-1 ---+
+   |               |
+   +--- SPINE-2 ---+--- LEAF-3
+при отказе одного пути VXLAN должен продолжить работать через оставшийся Spine.
 
 
 ## 6. Конфигурация оборудования
