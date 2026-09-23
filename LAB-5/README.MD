@@ -65,7 +65,7 @@ OVERLAY
 
 ## 4. Схема сети
 
-![схема сети](Clos_BGP_Scheme.png)
+![схема сети](vxlan_l2_scheme.png)
 
 ---
 
