@@ -48,6 +48,8 @@
 
 ## 3. Архитектура
 Фабрика состоит из двух логических уровней:
+
+```
 UNDERLAY
    |
    +-- eBGP IPv4
@@ -59,6 +61,7 @@ OVERLAY
    |
    +-- MP-BGP EVPN Control Plane
    +-- VXLAN Data Plane
+```
 
 ## 4. Схема сети
 
