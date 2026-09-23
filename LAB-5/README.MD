@@ -838,6 +838,8 @@ Total number of remote VTEPS:  2
 - VPC9 - 172.16.10.4
 ```
 
+Проверяем с VPC7 
+
 ```
 VPCS> ping 172.16.10.2
 
