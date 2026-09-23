@@ -71,6 +71,27 @@ OVERLAY
 
 ## 5. Настройка VxLAN. EVPN L2
 
+###  1. Проверка Underlay
+
+Перед настройкой VXLAN необходимо убедиться, что базовая IP-фабрика полностью работоспособна.
+Проверяем:
+- eBGP-соседства между Leaf и Spine;
+- маршруты до Loopback0 всех устройств;
+- ECMP через оба Spine;
+- доступность VTEP-адресов между Leaf;
+- MTU на Underlay-интерфейсах.
+
+###  2. Проверка Multi-Agent Routing
+
+Для работы EVPN на Arista EOS необходимо использовать:
+
+```
+service routing protocols model multi-agent
+```
+
+Проверяем наличие этой настройки на всех Leaf и Spine.
+
+
 
 ## 6. Конфигурация оборудования
 
