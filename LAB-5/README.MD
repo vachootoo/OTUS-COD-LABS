@@ -71,49 +71,6 @@ OVERLAY
 
 ## 5. Настройка VxLAN. EVPN L2
 
-В отличие от OSPF или IS-IS, BGP не обнаруживает соседей автоматически.
-Каждый сосед задаётся явно:
-
-```
-neighbor <IP> remote-as <ASN>
-```
-Через BGP будем распространять только Loopback0:
-```
-network 10.255.0.1/32
-```
-Для исключения path-hunting для Spine используются **одинаковые номера ASN**.
-
-Если назначить:
-```
-Spine-1 AS65001
-Spine-2 AS65002
-```
-то Leaf-1 получит маршрут Leaf-2 как:
-
-через Spine-1:
-```
-65001 65102
-```
-через Spine-2:
-```
-65002 65102
-```
-AS-PATH будут отличаться.
-
-Если использовать разные номера ASN, то для BGP ECMP тогда может потребоваться дополнительная настройка:
-```
-bgp bestpath as-path multi path-relax
-```
-для включения ECMP используем команду:
-```
- maximum-paths 4
-```
-Обязательно используем BFD и уменьшаем таймеры(по умолчанию 60 180):
-
-```
-timers bgp 3 9
-neighbor 10.0.1.1 bfd
-```
 
 ## 6. Конфигурация оборудования
 
@@ -144,14 +101,17 @@ system l1
    unsupported error-correction action error
 !
 interface Ethernet1
+   mtu 9000
    no switchport
-   ip address 10.0.1.0/31
+   ip address 10.0.1.0/31   
 !
 interface Ethernet2
+   mtu 9000
    no switchport
    ip address 10.0.1.2/31
 !
 interface Ethernet3
+   mtu 9000
    no switchport
    ip address 10.0.1.4/31
 !
@@ -243,14 +203,17 @@ system l1
    unsupported error-correction action error
 !
 interface Ethernet1
+   mtu 9000
    no switchport
    ip address 10.0.2.0/31
 !
 interface Ethernet2
+   mtu 9000
    no switchport
    ip address 10.0.2.2/31
 !
 interface Ethernet3
+   mtu 9000
    no switchport
    ip address 10.0.2.4/31
 !
@@ -344,10 +307,12 @@ vlan 10
    name vxlan10010
 !
 interface Ethernet1
+   mtu 9000
    no switchport
    ip address 10.0.1.1/31
 !
 interface Ethernet2
+   mtu 9000
    no switchport
    ip address 10.0.2.1/31
 !
@@ -448,10 +413,12 @@ vlan 10
    name vxlan10010
 !
 interface Ethernet1
+   mtu 9000
    no switchport
    ip address 10.0.1.3/31
 !
 interface Ethernet2
+   mtu 9000
    no switchport
    ip address 10.0.2.3/31
 !
@@ -553,10 +520,12 @@ vlan 10
    name vxlan10010
 !
 interface Ethernet1
+   mtu 9000
    no switchport
    ip address 10.0.1.5/31
 !
 interface Ethernet2
+   mtu 9000
    no switchport
    ip address 10.0.2.5/31
 !
