@@ -741,6 +741,21 @@ Neighbor            AS Session State AFI/SAFI                AFI/SAFI State   NL
 10.255.0.2       65000 Established   L2VPN EVPN              Negotiated              2          2
 ```
 
+Проверяем связность VTEP-VTEP
+
+```
+Leaf-1#ping 10.255.0.12 source 10.255.0.11
+PING 10.255.0.12 (10.255.0.12) from 10.255.0.11 : 72(100) bytes of data.
+80 bytes from 10.255.0.12: icmp_seq=1 ttl=63 time=6.97 ms
+80 bytes from 10.255.0.12: icmp_seq=2 ttl=63 time=4.31 ms
+80 bytes from 10.255.0.12: icmp_seq=3 ttl=63 time=3.45 ms
+80 bytes from 10.255.0.12: icmp_seq=4 ttl=63 time=3.08 ms
+80 bytes from 10.255.0.12: icmp_seq=5 ttl=63 time=3.17 ms
+
+--- 10.255.0.12 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 26ms
+rtt min/avg/max/mdev = 3.075/4.194/6.971/1.454 ms, ipg/ewma 6.536/5.509 ms
+```
 
 На клиентах зададим адреса:
 ```
