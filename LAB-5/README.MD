@@ -51,16 +51,16 @@
 
 ```
 UNDERLAY
-   |
-   +-- eBGP IPv4
-   +-- IP transport
-   +-- ECMP
-   +-- доставка пакетов между VTEP
+   
+   - eBGP IPv4
+   - IP transport
+   - ECMP
+   - доставка пакетов между VTEP
 
 OVERLAY
-   |
-   +-- MP-BGP EVPN Control Plane
-   +-- VXLAN Data Plane
+   
+   - MP-BGP EVPN Control Plane
+   - VXLAN Data Plane
 ```
 
 ## 4. Схема сети
