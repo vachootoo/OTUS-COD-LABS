@@ -756,13 +756,114 @@ PING 10.255.0.12 (10.255.0.12) from 10.255.0.11 : 72(100) bytes of data.
 5 packets transmitted, 5 received, 0% packet loss, time 26ms
 rtt min/avg/max/mdev = 3.075/4.194/6.971/1.454 ms, ipg/ewma 6.536/5.509 ms
 ```
+```
+Leaf-1#ping 10.255.0.13 source 10.255.0.11
+PING 10.255.0.13 (10.255.0.13) from 10.255.0.11 : 72(100) bytes of data.
+80 bytes from 10.255.0.13: icmp_seq=1 ttl=63 time=7.16 ms
+80 bytes from 10.255.0.13: icmp_seq=2 ttl=63 time=4.39 ms
+80 bytes from 10.255.0.13: icmp_seq=3 ttl=63 time=2.66 ms
+80 bytes from 10.255.0.13: icmp_seq=4 ttl=63 time=2.89 ms
+80 bytes from 10.255.0.13: icmp_seq=5 ttl=63 time=2.82 ms
+
+--- 10.255.0.13 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 26ms
+rtt min/avg/max/mdev = 2.659/3.983/7.160/1.706 ms, ipg/ewma 6.598/5.487 ms
+```
+Проверка EVPN BGP соседств
+
+```
+Spine-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.255.0.1, local AS number 65000
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+                           10.255.0.11 4 65101           8113      8129    0    0 05:43:44 Estab   2      2
+                           10.255.0.12 4 65102           7920      7935    0    0 04:31:19 Estab   1      1
+                           10.255.0.13 4 65103           8347      8349    0    0 05:53:41 Estab   2      2
+```
+```
+Spine-2(config)#sh bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.255.0.2, local AS number 65000
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor    V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+                           10.255.0.11 4 65101           3885      3885    0    0 02:45:02 Estab   1      1
+                           10.255.0.12 4 65102           3894      3883    0    0 02:45:02 Estab   1      1
+                           10.255.0.13 4 65103           3891      3888    0    0 02:45:02 Estab   1      1
+```
+
+Проверка всех EVPN маршрутов
+
+```
+Leaf-1#show bgp evpn
+BGP routing table information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.255.0.11:10010 imet 10.255.0.11
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.11:10010 imet 10.255.0.12
+                                 10.255.0.12           -       100     0       65000 65102 i
+ *  ec    RD: 10.255.0.11:10010 imet 10.255.0.12
+                                 10.255.0.12           -       100     0       65000 65102 i
+ * >Ec    RD: 10.255.0.11:10010 imet 10.255.0.13
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.11:10010 imet 10.255.0.13
+                                 10.255.0.13           -       100     0       65000 65103 i
+```
+
+Проверка удаленных VTEP
+
+```
+Leaf-2#show vxlan vtep
+Remote VTEPS for Vxlan1:
+
+VTEP              Tunnel Type(s)
+----------------- --------------
+10.255.0.11       unicast, flood
+10.255.0.13       unicast, flood
+
+Total number of remote VTEPS:  2
+```
 
 На клиентах зададим адреса:
 ```
-172.16.10.1
-172.16.10.2
-172.16.10.3
-172.16.10.4
+- VPC7 - 172.16.10.1
+- VPC6 - 172.16.10.2
+- VPC8 - 172.16.10.3
+- VPC9 - 172.16.10.4
+```
+
+```
+VPCS> ping 172.16.10.2
+
+84 bytes from 172.16.10.2 icmp_seq=1 ttl=64 time=8.965 ms
+84 bytes from 172.16.10.2 icmp_seq=2 ttl=64 time=6.742 ms
+84 bytes from 172.16.10.2 icmp_seq=3 ttl=64 time=6.093 ms
+84 bytes from 172.16.10.2 icmp_seq=4 ttl=64 time=6.337 ms
+84 bytes from 172.16.10.2 icmp_seq=5 ttl=64 time=5.706 ms
+```
+```
+VPCS> ping 172.16.10.3
+
+84 bytes from 172.16.10.3 icmp_seq=1 ttl=64 time=11.739 ms
+84 bytes from 172.16.10.3 icmp_seq=2 ttl=64 time=6.698 ms
+84 bytes from 172.16.10.3 icmp_seq=3 ttl=64 time=6.547 ms
+84 bytes from 172.16.10.3 icmp_seq=4 ttl=64 time=8.327 ms
+84 bytes from 172.16.10.3 icmp_seq=5 ttl=64 time=6.420 ms
+```
+```
+VPCS> ping 172.16.10.4
+
+84 bytes from 172.16.10.4 icmp_seq=1 ttl=64 time=12.919 ms
+84 bytes from 172.16.10.4 icmp_seq=2 ttl=64 time=5.924 ms
+84 bytes from 172.16.10.4 icmp_seq=3 ttl=64 time=6.533 ms
+84 bytes from 172.16.10.4 icmp_seq=4 ttl=64 time=7.249 ms
+84 bytes from 172.16.10.4 icmp_seq=5 ttl=64 time=6.585 ms
 ```
 
 
