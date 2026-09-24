@@ -867,5 +867,64 @@ VPCS> ping 172.16.10.4
 84 bytes from 172.16.10.4 icmp_seq=4 ttl=64 time=7.249 ms
 84 bytes from 172.16.10.4 icmp_seq=5 ttl=64 time=6.585 ms
 ```
+**show bgp evpn route-type mac-ip**
+```
+Leaf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
 
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.255.0.12:10010 mac-ip 0050.7966.6818
+                                 10.255.0.12           -       100     0       65000 65102 i
+ *  ec    RD: 10.255.0.12:10010 mac-ip 0050.7966.6818
+                                 10.255.0.12           -       100     0       65000 65102 i
+ * >      RD: 10.255.0.11:10010 mac-ip 0050.7966.6819
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.13:10010 mac-ip 0050.7966.681a
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:10010 mac-ip 0050.7966.681a
+                                 10.255.0.13           -       100     0       65000 65103 i
+ * >Ec    RD: 10.255.0.13:10010 mac-ip 0050.7966.681b
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:10010 mac-ip 0050.7966.681b
+                                 10.255.0.13           -       100     0       65000 65103 i
+```
+**show vxlan address-table**
+```
+Leaf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
 
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  0050.7966.6818  EVPN      Vx1  10.255.0.12      1       0:04:28 ago
+  10  0050.7966.681a  EVPN      Vx1  10.255.0.13      1       0:00:59 ago
+  10  0050.7966.681b  EVPN      Vx1  10.255.0.13      1       0:04:47 ago
+Total Remote Mac Addresses for this criterion: 3
+
+```
+show mac address-table vlan 10
+```
+Leaf-1#show mac address-table vlan 10
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+  10    0050.7966.6818    DYNAMIC     Vx1        1       0:04:44 ago
+  10    0050.7966.6819    DYNAMIC     Et8        1       0:05:03 ago
+  10    0050.7966.681a    DYNAMIC     Vx1        1       0:01:16 ago
+  10    0050.7966.681b    DYNAMIC     Vx1        1       0:05:03 ago
+Total Mac Addresses for this criterion: 4
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
