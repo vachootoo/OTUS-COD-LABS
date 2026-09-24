@@ -575,7 +575,7 @@ router bgp 65102
    neighbor 10.255.0.2 peer group SPINE_EVPN
    !
    vlan 10
-      rd 10.255.0.11:10010
+      rd 10.255.0.12:10010
       route-target both 65000:10010
       redistribute learned
    !
@@ -682,7 +682,7 @@ router bgp 65103
    neighbor 10.255.0.2 peer group SPINE_EVPN
    !
    vlan 10
-      rd 10.255.0.11:10010
+      rd 10.255.0.13:10010
       route-target both 65000:10010
       redistribute learned
    !
