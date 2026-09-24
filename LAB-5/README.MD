@@ -907,7 +907,7 @@ VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
 Total Remote Mac Addresses for this criterion: 3
 
 ```
-show mac address-table vlan 10
+**show mac address-table vlan 10**
 ```
 Leaf-1#show mac address-table vlan 10
           Mac Address Table
