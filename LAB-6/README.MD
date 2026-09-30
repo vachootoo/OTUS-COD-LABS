@@ -1144,3 +1144,112 @@ VPCS> ping 172.16.10.2
 84 bytes from 172.16.10.2 icmp_seq=4 ttl=62 time=6.394 ms
 84 bytes from 172.16.10.2 icmp_seq=5 ttl=62 time=6.730 ms
 ```
+
+```
+Leaf-1#show ip route vrf TENANT
+
+VRF: TENANT
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+Gateway of last resort is not set
+
+ B E      172.16.10.2/32 [200/0]
+           via VTEP 10.255.0.13 VNI 50000 router-mac 50:06:2c:ed:74:bf local-interface Vxlan1
+ C        172.16.10.0/24
+           directly connected, Vlan10
+ B E      172.16.20.1/32 [200/0]
+           via VTEP 10.255.0.12 VNI 50000 router-mac 50:12:da:c2:7a:e8 local-interface Vxlan1
+ C        172.16.20.0/24
+           directly connected, Vlan20
+ B E      172.16.30.1/32 [200/0]
+           via VTEP 10.255.0.13 VNI 50000 router-mac 50:06:2c:ed:74:bf local-interface Vxlan1
+ C        172.16.30.0/24
+           directly connected, Vlan30
+```
+```
+Leaf-2#show ip route vrf TENANT
+
+VRF: TENANT
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+Gateway of last resort is not set
+
+ B E      172.16.10.1/32 [200/0]
+           via VTEP 10.255.0.11 VNI 50000 router-mac 50:a3:6c:b9:83:b9 local-interface Vxlan1
+ B E      172.16.10.2/32 [200/0]
+           via VTEP 10.255.0.13 VNI 50000 router-mac 50:06:2c:ed:74:bf local-interface Vxlan1
+ C        172.16.10.0/24
+           directly connected, Vlan10
+ C        172.16.20.0/24
+           directly connected, Vlan20
+ C        172.16.30.0/24
+           directly connected, Vlan30
+```
+```
+Leaf-3#show ip route vrf TENANT
+
+VRF: TENANT
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+Gateway of last resort is not set
+
+ B E      172.16.10.1/32 [200/0]
+           via VTEP 10.255.0.11 VNI 50000 router-mac 50:a3:6c:b9:83:b9 local-interface Vxlan1
+ C        172.16.10.0/24
+           directly connected, Vlan10
+ B E      172.16.20.1/32 [200/0]
+           via VTEP 10.255.0.12 VNI 50000 router-mac 50:12:da:c2:7a:e8 local-interface Vxlan1
+ C        172.16.20.0/24
+           directly connected, Vlan20
+ C        172.16.30.0/24
+           directly connected, Vlan30
+```
+VPC6
+
+```
+VPCS> arp
+
+50:a3:6c:b9:83:b9  172.16.20.254 expires in 57 seconds
+```
+VPC7
+```
+VPCS> arp
+
+50:a3:6c:b9:83:b9  172.16.10.254 expires in 5 seconds
+```
