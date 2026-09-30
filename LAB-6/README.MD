@@ -90,6 +90,17 @@ OVERLAY
 
 ## 5. Настройка VxLAN. EVPN L3
 
+При использовании Symmetric IRB маршрутизация выполняется как на ingress VTEP, так и на egress VTEP.
+
+На всех Leaf создаём:
+```
+vrf instance TENANT
+
+ip routing vrf TENANT
+```
+
+
+
 ## 6. Конфигурация устройств
 
 <details>
