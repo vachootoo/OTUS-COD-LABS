@@ -1253,3 +1253,10 @@ VPCS> arp
 
 50:a3:6c:b9:83:b9  172.16.10.254 expires in 5 seconds
 ```
+
+VPC8
+```
+VPCS> sh arp
+
+50:a3:6c:b9:83:b9  172.16.30.254 expires in 59 seconds
+```
