@@ -855,3 +855,49 @@ end
 </details>
 
 ## 7. Конфигурация устройств
+
+**Underlay**
+```
+show ip bgp summary
+show ip route
+show ip route 10.255.0.11
+show ip route 10.255.0.12
+show ip route 10.255.0.13
+```
+**EVPN Control Plane**
+```
+show bgp evpn summary
+show bgp evpn
+show bgp evpn instance
+show bgp evpn route-type mac-ip
+show bgp evpn route-type imet
+show bgp evpn route-type ip-prefix ipv4
+```
+**VXLAN Data Plane**
+```
+show interfaces Vxlan1
+show vxlan vni
+show vxlan address-table
+show vxlan config-sanity
+show vxlan config-sanity detail
+```
+**VRF**
+```
+show vrf
+show ip interface brief vrf TENANT
+show ip route vrf TENANT
+show arp vrf TENANT
+```
+**VLAN**
+```
+show vlan
+show interfaces Vlan10
+show interfaces Vlan20
+show interfaces Vlan30
+```
+**MAC**
+```
+show mac address-table
+show mac address-table dynamic
+show vxlan address-table
+```
