@@ -84,7 +84,7 @@ OVERLAY
 
 ## 4. Схема сети
 
-![схема сети](vxlan_l2_scheme.png)
+![схема сети](l3vpn_scheme.png)
 
 ---
 
