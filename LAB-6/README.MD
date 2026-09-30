@@ -1243,9 +1243,15 @@ Gateway of last resort is not set
 VPC6
 
 ```
+VPCS> ping 172.16.20.254
+
+84 bytes from 172.16.20.254 icmp_seq=1 ttl=64 time=1.443 ms
+84 bytes from 172.16.20.254 icmp_seq=2 ttl=64 time=1.454 ms
+84 bytes from 172.16.20.254 icmp_seq=3 ttl=64 time=2.071 ms
+
 VPCS> arp
 
-50:a3:6c:b9:83:b9  172.16.20.254 expires in 57 seconds
+50:12:da:c2:7a:e8  172.16.20.254 expires in 114 seconds
 ```
 VPC7
 ```
@@ -1256,7 +1262,12 @@ VPCS> arp
 
 VPC8
 ```
+VPCS> ping 172.16.30.254
+
+84 bytes from 172.16.30.254 icmp_seq=1 ttl=64 time=2.089 ms
+84 bytes from 172.16.30.254 icmp_seq=2 ttl=64 time=1.549 ms
+^C
 VPCS> sh arp
 
-50:a3:6c:b9:83:b9  172.16.30.254 expires in 59 seconds
+50:06:2c:ed:74:bf  172.16.30.254 expires in 115 seconds
 ```
