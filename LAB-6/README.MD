@@ -94,13 +94,52 @@ OVERLAY
 
 На всех Leaf создаём:
 ```
-vrf instance TENANT
+vrf instance TENANT - создаем vhf
 
-ip routing vrf TENANT
+ip routing vrf TENANT - включаем маршрутизаию в этом vrf
+```
+**Задаем Anycast gateway**
+
+На всех Leaf используется одинаковый virtual-router MAC:
+```
+ip virtual-router mac-address 00:1c:73:00:00:01
 ```
 
+Создаём SVI.
 
+```
+interface Vlan10
+   description USERS_VLAN10_GATEWAY
+   vrf TENANT
+   ip address virtual 172.16.10.254/24
+!
+interface Vlan20
+   description USERS_VLAN20_GATEWAY
+   vrf TENANT
+   ip address virtual 172.16.20.254/24
+!
+interface Vlan30
+   description USERS_VLAN30_GATEWAY
+   vrf TENANT
+   ip address virtual 172.16.30.254/24
+!
+```
+**Настройка VXLAN**
 
+На существующем интерфейсе Vxlan1 добавляем L2VNI:
+```
+interface Vxlan1
+   vxlan vlan 10 vni 10010
+   vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
+!
+```
+После чего добавляем L3VNI:
+```
+interface Vxlan1
+   vxlan vrf TENANT vni 50000
+!
+```
 ## 6. Конфигурация устройств
 
 <details>
