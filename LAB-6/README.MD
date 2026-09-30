@@ -4,7 +4,7 @@
 
 Расширить существующую VXLAN EVPN фабрику поддержкой маршрутизации между пользовательскими сетями.
 
-Для организации L3 VXLAN используется модель Symmetric IRB (Integrated Routing and Bridging).
+Для организации L3 VXLAN будем использовать модель Symmetric IRB (Integrated Routing and Bridging).
 
 В рамках работы необходимо:
 
