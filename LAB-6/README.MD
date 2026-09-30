@@ -92,6 +92,12 @@ OVERLAY
 
 При использовании Symmetric IRB маршрутизация выполняется как на ingress VTEP, так и на egress VTEP.
 
+Главное преимущество Symmetric IRB — масштабируемость.
+
+Leaf не обязан иметь все пользовательские L2 VLAN всей фабрики только для того, чтобы маршрутизировать к ним трафик.
+
+Маршрутизация проходит через один общий L3VNI.
+
 На всех Leaf создаём:
 ```
 vrf instance TENANT - создаем vhf
@@ -904,6 +910,8 @@ show mac address-table dynamic
 show vxlan address-table
 ```
 
+Для примера проверяем на Leaf-1:
+
 ```
 Leaf-1#show bgp evpn summary
 BGP summary information for VRF default
@@ -1102,9 +1110,10 @@ VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
 Total Remote Mac Addresses for this criterion: 2
 ```
 Проверяем связь между хостами:
+
 Проверяем с VPC6.
 
-Пинг до VPC7
+Пинг до VPC7:
 ```
 VPCS> ping 172.16.10.1
 
@@ -1114,7 +1123,7 @@ VPCS> ping 172.16.10.1
 84 bytes from 172.16.10.1 icmp_seq=4 ttl=63 time=10.173 ms
 84 bytes from 172.16.10.1 icmp_seq=5 ttl=63 time=7.764 ms
 ```
-Пинг до VPC8
+Пинг до VPC8:
 ```
 VPCS> ping 172.16.30.1
 
@@ -1124,7 +1133,7 @@ VPCS> ping 172.16.30.1
 84 bytes from 172.16.30.1 icmp_seq=4 ttl=63 time=5.931 ms
 84 bytes from 172.16.30.1 icmp_seq=5 ttl=63 time=7.447 ms
 ```
-Пинг до VPC9
+Пинг до VPC9:
 ```
 VPCS> ping 172.16.10.2
 
