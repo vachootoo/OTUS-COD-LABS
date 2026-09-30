@@ -856,6 +856,8 @@ end
 
 ## 7. Проверка
 
+### Полезные команды.
+
 **Underlay**
 ```
 show ip bgp summary
@@ -900,4 +902,235 @@ show interfaces Vlan30
 show mac address-table
 show mac address-table dynamic
 show vxlan address-table
+```
+
+```
+Leaf-1#show bgp evpn summary
+BGP summary information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+Neighbor Status Codes: m - Under maintenance
+  Description              Neighbor   V AS           MsgRcvd   MsgSent  InQ OutQ  Up/Down State   PfxRcd PfxAcc
+                           10.255.0.1 4 65000           1509      1503    0    0 01:03:45 Estab   12     12
+                           10.255.0.2 4 65000           1513      1509    0    0 01:03:45 Estab   12     12
+```
+```
+Leaf-1#show bgp summary
+BGP summary information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+Neighbor            AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+---------- ----------- ------------- ----------------------- -------------- ---------- ----------
+10.0.1.0         65000 Established   IPv4 Unicast            Negotiated              3          3
+10.0.2.0         65000 Established   IPv4 Unicast            Negotiated              3          3
+10.255.0.1       65000 Established   L2VPN EVPN              Negotiated             12         12
+10.255.0.2       65000 Established   L2VPN EVPN              Negotiated             12         12
+```
+```
+Leaf-1#show bgp evpn instance
+EVPN instance: VLAN 10
+  Route distinguisher: 10.255.0.11:10010
+  Route target import: Route-Target-AS:65000:10010
+  Route target export: Route-Target-AS:65000:10010
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.255.0.11
+  VXLAN: enabled
+  MPLS: disabled
+EVPN instance: VLAN 20
+  Route distinguisher: 10.255.0.11:10020
+  Route target import: Route-Target-AS:65000:10020
+  Route target export: Route-Target-AS:65000:10020
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.255.0.11
+  VXLAN: enabled
+  MPLS: disabled
+EVPN instance: VLAN 30
+  Route distinguisher: 10.255.0.11:10030
+  Route target import: Route-Target-AS:65000:10030
+  Route target export: Route-Target-AS:65000:10030
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.255.0.11
+  VXLAN: enabled
+  MPLS: disabled
+```
+```
+Leaf-1#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.255.0.12:10020 mac-ip 0050.7966.6818
+                                 10.255.0.12           -       100     0       65000 65102 i
+ *  ec    RD: 10.255.0.12:10020 mac-ip 0050.7966.6818
+                                 10.255.0.12           -       100     0       65000 65102 i
+ * >Ec    RD: 10.255.0.12:10020 mac-ip 0050.7966.6818 172.16.20.1
+                                 10.255.0.12           -       100     0       65000 65102 i
+ *  ec    RD: 10.255.0.12:10020 mac-ip 0050.7966.6818 172.16.20.1
+                                 10.255.0.12           -       100     0       65000 65102 i
+ * >      RD: 10.255.0.11:10010 mac-ip 0050.7966.6819
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.13:10030 mac-ip 0050.7966.681a
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:10030 mac-ip 0050.7966.681a
+                                 10.255.0.13           -       100     0       65000 65103 i
+ * >Ec    RD: 10.255.0.13:10010 mac-ip 0050.7966.681b
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:10010 mac-ip 0050.7966.681b
+                                 10.255.0.13           -       100     0       65000 65103 i
+ * >Ec    RD: 10.255.0.13:10010 mac-ip 0050.7966.681b 172.16.10.2
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:10010 mac-ip 0050.7966.681b 172.16.10.2
+                                 10.255.0.13           -       100     0       65000 65103 i
+```
+```
+Leaf-1#show bgp evpn route-type ip-prefix ipv4
+BGP routing table information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.255.0.11:50000 ip-prefix 172.16.10.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.12:50000 ip-prefix 172.16.10.0/24
+                                 10.255.0.12           -       100     0       65000 65102 i
+ *  ec    RD: 10.255.0.12:50000 ip-prefix 172.16.10.0/24
+                                 10.255.0.12           -       100     0       65000 65102 i
+ * >Ec    RD: 10.255.0.13:50000 ip-prefix 172.16.10.0/24
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:50000 ip-prefix 172.16.10.0/24
+                                 10.255.0.13           -       100     0       65000 65103 i
+ * >      RD: 10.255.0.11:50000 ip-prefix 172.16.20.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.12:50000 ip-prefix 172.16.20.0/24
+                                 10.255.0.12           -       100     0       65000 65102 i
+ *  ec    RD: 10.255.0.12:50000 ip-prefix 172.16.20.0/24
+                                 10.255.0.12           -       100     0       65000 65102 i
+ * >Ec    RD: 10.255.0.13:50000 ip-prefix 172.16.20.0/24
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:50000 ip-prefix 172.16.20.0/24
+                                 10.255.0.13           -       100     0       65000 65103 i
+ * >      RD: 10.255.0.11:50000 ip-prefix 172.16.30.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.12:50000 ip-prefix 172.16.30.0/24
+                                 10.255.0.12           -       100     0       65000 65102 i
+ *  ec    RD: 10.255.0.12:50000 ip-prefix 172.16.30.0/24
+                                 10.255.0.12           -       100     0       65000 65102 i
+ * >Ec    RD: 10.255.0.13:50000 ip-prefix 172.16.30.0/24
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:50000 ip-prefix 172.16.30.0/24
+                                 10.255.0.13           -       100     0       65000 65103 i
+```
+```
+Leaf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  0050.7966.681b  EVPN      Vx1  10.255.0.13      1       0:01:37 ago
+  20  0050.7966.6818  EVPN      Vx1  10.255.0.12      1       0:03:10 ago
+  30  0050.7966.681a  EVPN      Vx1  10.255.0.13      1       0:02:42 ago
+Total Remote Mac Addresses for this criterion: 3
+Leaf-1#show vxlan vni
+VNI to VLAN Mapping for Vxlan1
+VNI         VLAN       Source       Interface       802.1Q Tag
+----------- ---------- ------------ --------------- ----------
+10010       10         static       Ethernet8       untagged
+                                    Vxlan1          10
+10020       20         static       Vxlan1          20
+10030       30         static       Vxlan1          30
+
+VNI to dynamic VLAN Mapping for Vxlan1
+VNI         VLAN       VRF          Source
+----------- ---------- ------------ ------------
+50000       4097       TENANT       evpn
+
+Leaf-1#show ip interface brief vrf TENANT
+% Invalid input
+Leaf-1#show ip interface brief ?
+  >     Redirect output to URL
+  >>    Append redirected output to URL
+  |     Command output pipe filters
+  <cr>
+```
+```
+Leaf-1#sh vrf
+Maximum number of VRFs allowed: 1024
+   VRF           Protocols       State         Interfaces
+------------- --------------- ---------------- ------------------------
+   TENANT        IPv4            routing       Vl10, Vl20, Vl30, Vl4097
+   TENANT        IPv6            no routing    Vl4097
+   default       IPv4            routing       Et1, Et2, Lo0
+   default       IPv6            no routing
+```
+```
+Leaf-1#show mac address-table
+          Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports      Moves   Last Move
+----    -----------       ----        -----      -----   ---------
+   1    001c.7300.0001    STATIC      Cpu
+  10    001c.7300.0001    STATIC      Cpu
+  10    0050.7966.681b    DYNAMIC     Vx1        1       0:04:08 ago
+  20    001c.7300.0001    STATIC      Cpu
+  20    0050.7966.6818    DYNAMIC     Vx1        1       0:05:41 ago
+  30    001c.7300.0001    STATIC      Cpu
+Total Mac Addresses for this criterion: 6
+
+          Multicast Mac Address Table
+------------------------------------------------------------------
+
+Vlan    Mac Address       Type        Ports
+----    -----------       ----        -----
+Total Mac Addresses for this criterion: 0
+```
+```
+Leaf-1#show vxlan address-table
+          Vxlan Mac Address Table
+----------------------------------------------------------------------
+
+VLAN  Mac Address     Type      Prt  VTEP             Moves   Last Move
+----  -----------     ----      ---  ----             -----   ---------
+  10  0050.7966.681b  EVPN      Vx1  10.255.0.13      1       0:04:44 ago
+  20  0050.7966.6818  EVPN      Vx1  10.255.0.12      1       0:06:18 ago
+Total Remote Mac Addresses for this criterion: 2
+```
+Проверяем связь между хостами:
+Проверяем с VPC6.
+
+Пинг до VPC7
+```
+VPCS> ping 172.16.10.1
+
+84 bytes from 172.16.10.1 icmp_seq=1 ttl=63 time=10.441 ms
+84 bytes from 172.16.10.1 icmp_seq=2 ttl=63 time=7.547 ms
+84 bytes from 172.16.10.1 icmp_seq=3 ttl=63 time=7.361 ms
+84 bytes from 172.16.10.1 icmp_seq=4 ttl=63 time=10.173 ms
+84 bytes from 172.16.10.1 icmp_seq=5 ttl=63 time=7.764 ms
+```
+Пинг до VPC8
+```
+VPCS> ping 172.16.30.1
+
+84 bytes from 172.16.30.1 icmp_seq=1 ttl=63 time=26.569 ms
+84 bytes from 172.16.30.1 icmp_seq=2 ttl=63 time=10.518 ms
+84 bytes from 172.16.30.1 icmp_seq=3 ttl=63 time=6.040 ms
+84 bytes from 172.16.30.1 icmp_seq=4 ttl=63 time=5.931 ms
+84 bytes from 172.16.30.1 icmp_seq=5 ttl=63 time=7.447 ms
+```
+Пинг до VPC9
+```
+VPCS> ping 172.16.10.2
+
+84 bytes from 172.16.10.2 icmp_seq=1 ttl=62 time=14.678 ms
+84 bytes from 172.16.10.2 icmp_seq=2 ttl=62 time=7.682 ms
+84 bytes from 172.16.10.2 icmp_seq=3 ttl=62 time=6.809 ms
+84 bytes from 172.16.10.2 icmp_seq=4 ttl=62 time=6.394 ms
+84 bytes from 172.16.10.2 icmp_seq=5 ttl=62 time=6.730 ms
 ```
