@@ -82,6 +82,8 @@ OVERLAY
    - VXLAN Data Plane
 ```
 
+Добавляется L3 VXLAN
+
 ## 4. Схема сети
 
 ![схема сети](l3vpn_scheme.png)
