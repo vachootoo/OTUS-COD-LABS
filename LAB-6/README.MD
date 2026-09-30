@@ -171,7 +171,7 @@ router bgp 65101
       rd 10.255.0.11:50000
       route-target import evpn 65000:50000
       route-target export evpn 65000:50000
-      redistribute connected
+      
 !
 ```
 **EVPN Route Type 5**
