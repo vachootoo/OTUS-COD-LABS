@@ -118,15 +118,15 @@ ip virtual-router mac-address 00:1c:73:00:00:01
 ```
 interface Vlan10
    vrf TENANT
-   ip address 172.16.10.254/24
+   ip address virtual 172.16.10.254/24
 !
 interface Vlan20
    vrf TENANT
-   ip address 172.16.20.254/24
+   ip address virtual 172.16.20.254/24
 !
 interface Vlan30
    vrf TENANT
-   ip address 172.16.30.254/24
+   ip address virtual 172.16.30.254/24
 !
 ```
 **Настройка VxLAN**
@@ -479,15 +479,15 @@ interface Management1
 !
 interface Vlan10
    vrf TENANT
-   ip address 172.16.10.254/24
+   ip address virtual 172.16.10.254/24
 !
 interface Vlan20
    vrf TENANT
-   ip address 172.16.20.254/24
+   ip address virtual 172.16.20.254/24
 !
 interface Vlan30
    vrf TENANT
-   ip address 172.16.30.254/24
+   ip address virtual 172.16.30.254/24
 !
 interface Vxlan1
    vxlan source-interface Loopback0
@@ -629,15 +629,15 @@ interface Management1
 !
 interface Vlan10
    vrf TENANT
-   ip address 172.16.10.254/24
+   ip address virtual 172.16.10.254/24
 !
 interface Vlan20
    vrf TENANT
-   ip address 172.16.20.254/24
+   ip address virtual 172.16.20.254/24
 !
 interface Vlan30
    vrf TENANT
-   ip address 172.16.30.254/24
+   ip address virtual 172.16.30.254/24
 !
 interface Vxlan1
    vxlan source-interface Loopback0
@@ -777,15 +777,15 @@ interface Management1
 !
 interface Vlan10
    vrf TENANT
-   ip address 172.16.10.254/24
+   ip address virtual 172.16.10.254/24
 !
 interface Vlan20
    vrf TENANT
-   ip address 172.16.20.254/24
+   ip address virtual 172.16.20.254/24
 !
 interface Vlan30
    vrf TENANT
-   ip address 172.16.30.254/24
+   ip address virtual 172.16.30.254/24
 !
 interface Vxlan1
    vxlan source-interface Loopback0
@@ -1243,31 +1243,41 @@ Gateway of last resort is not set
 VPC6
 
 ```
-VPCS> ping 172.16.20.254
+VPCS> ping 172.16.10.1
 
-84 bytes from 172.16.20.254 icmp_seq=1 ttl=64 time=1.443 ms
-84 bytes from 172.16.20.254 icmp_seq=2 ttl=64 time=1.454 ms
-84 bytes from 172.16.20.254 icmp_seq=3 ttl=64 time=2.071 ms
+84 bytes from 172.16.10.1 icmp_seq=1 ttl=62 time=61.484 ms
+84 bytes from 172.16.10.1 icmp_seq=2 ttl=62 time=7.130 ms
+^C
+VPCS> sh arp
 
-VPCS> arp
-
-50:12:da:c2:7a:e8  172.16.20.254 expires in 114 seconds
+00:1c:73:00:00:01  172.16.20.254 expires in 116 seconds
 ```
 VPC7
 ```
-VPCS> arp
+VPCS> ping 172.16.20.1
 
-50:a3:6c:b9:83:b9  172.16.10.254 expires in 5 seconds
+84 bytes from 172.16.20.1 icmp_seq=1 ttl=62 time=8.322 ms
+84 bytes from 172.16.20.1 icmp_seq=2 ttl=62 time=7.283 ms
+84 bytes from 172.16.20.1 icmp_seq=3 ttl=62 time=5.867 ms
+84 bytes from 172.16.20.1 icmp_seq=4 ttl=62 time=6.667 ms
+84 bytes from 172.16.20.1 icmp_seq=5 ttl=62 time=6.690 ms
+
+VPCS> sh arp
+
+00:1c:73:00:00:01  172.16.10.254 expires in 113 seconds
 ```
 
 VPC8
 ```
-VPCS> ping 172.16.30.254
+VPCS> ping 172.16.10.1
 
-84 bytes from 172.16.30.254 icmp_seq=1 ttl=64 time=2.089 ms
-84 bytes from 172.16.30.254 icmp_seq=2 ttl=64 time=1.549 ms
-^C
+84 bytes from 172.16.10.1 icmp_seq=1 ttl=62 time=5.431 ms
+84 bytes from 172.16.10.1 icmp_seq=2 ttl=62 time=6.360 ms
+84 bytes from 172.16.10.1 icmp_seq=3 ttl=62 time=7.048 ms
+84 bytes from 172.16.10.1 icmp_seq=4 ttl=62 time=7.830 ms
+84 bytes from 172.16.10.1 icmp_seq=5 ttl=62 time=8.726 ms
+
 VPCS> sh arp
 
-50:06:2c:ed:74:bf  172.16.30.254 expires in 115 seconds
+00:1c:73:00:00:01  172.16.30.254 expires in 112 seconds
 ```
