@@ -140,6 +140,70 @@ interface Vxlan1
    vxlan vrf TENANT vni 50000
 !
 ```
+**BGP EVPN**
+
+Добавляем в следующие параметры в bgp router на каждом Leaf:
+
+```
+router bgp 65101
+   !
+   vlan 10
+      rd 10.255.0.11:10010
+      route-target both 65000:10010
+      redistribute learned
+   !
+   vlan 20
+      rd 10.255.0.11:10020
+      route-target both 65000:10020
+      redistribute learned
+   !
+   vlan 30
+      rd 10.255.0.11:10030
+      route-target both 65000:10030
+      redistribute learned
+   !
+   vrf TENANT
+      rd 10.255.0.11:50000
+      route-target import evpn 65000:50000
+      route-target export evpn 65000:50000
+      redistribute connected
+!
+```
+**EVPN Route Type 5**
+
+EVPN Type-5 используется для распространения IP Prefix.
+
+Например:
+```
+172.16.10.0/24
+172.16.20.0/24
+172.16.30.0/24
+```
+Connected-маршруты экспортируются из VRF благодаря:
+```
+router bgp 65101
+   vrf TENANT
+      redistribute connected
+```
+При этом маршрут получает Route Target:
+```
+65000:50000
+```
+Удалённый VTEP проверяет RT и импортирует маршрут в:
+```
+VRF TENANT
+```
+Проверка:
+```
+show bgp evpn route-type ip-prefix ipv4
+```
+Например:
+```
+show bgp evpn route-type ip-prefix ipv4 172.16.10.0/24
+```
+
+Для host-to-host forwarding внутри EVPN фабрики важную роль также играют Type-2 MAC/IP routes. Type-5 предназначен именно для распространения IP-prefix маршрутов и особенно полезен при подключении внешних сетей, firewall, border leaf и других L3-сервисов.
+
 ## 6. Конфигурация устройств
 
 <details>
