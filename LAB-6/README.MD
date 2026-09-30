@@ -118,15 +118,15 @@ ip virtual-router mac-address 00:1c:73:00:00:01
 ```
 interface Vlan10
    vrf TENANT
-   ip address virtual 172.16.10.254/24
+   ip address 172.16.10.254/24
 !
 interface Vlan20
    vrf TENANT
-   ip address virtual 172.16.20.254/24
+   ip address 172.16.20.254/24
 !
 interface Vlan30
    vrf TENANT
-   ip address virtual 172.16.30.254/24
+   ip address 172.16.30.254/24
 !
 ```
 **Настройка VxLAN**
