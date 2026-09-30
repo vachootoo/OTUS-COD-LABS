@@ -184,30 +184,9 @@ EVPN Type-5 используется для распространения IP Pr
 172.16.20.0/24
 172.16.30.0/24
 ```
-Connected-маршруты экспортируются из VRF благодаря:
-```
-router bgp 65101
-   vrf TENANT
-      redistribute connected
-```
-При этом маршрут получает Route Target:
-```
-65000:50000
-```
-Удалённый VTEP проверяет RT и импортирует маршрут в:
-```
-VRF TENANT
-```
-Проверка:
-```
-show bgp evpn route-type ip-prefix ipv4
-```
-Например:
-```
-show bgp evpn route-type ip-prefix ipv4 172.16.10.0/24
-```
+Но в данной лабораторной нам это не требуется.
 
-Для host-to-host forwarding внутри EVPN фабрики важную роль также играют Type-2 MAC/IP routes. Type-5 предназначен именно для распространения IP-prefix маршрутов и особенно полезен при подключении внешних сетей, firewall, border leaf и других L3-сервисов.
+Для host-to-host forwarding внутри EVPN фабрики важную роль также играют Type-2 MAC/IP routes. Type-5 предназначен для распространения IP-prefix маршрутов и особенно полезен при подключении внешних сетей, firewall, border leaf и других L3-сервисов.
 
 ## 6. Конфигурация устройств
 
@@ -547,7 +526,6 @@ router bgp 65101
       route-target import evpn 65000:50000
       route-target export evpn 65000:50000
       router-id 10.255.0.11
-      redistribute connected
 !
 router multicast
    ipv4
@@ -697,7 +675,7 @@ router bgp 65102
       route-target import evpn 65000:50000
       route-target export evpn 65000:50000
       router-id 10.255.0.12
-      redistribute connected
+
 !
 router multicast
    ipv4
@@ -845,7 +823,6 @@ router bgp 65103
       route-target import evpn 65000:50000
       route-target export evpn 65000:50000
       router-id 10.255.0.13
-      redistribute connected
 !
 router multicast
    ipv4
@@ -1029,13 +1006,6 @@ VNI         VLAN       VRF          Source
 ----------- ---------- ------------ ------------
 50000       4097       TENANT       evpn
 
-Leaf-1#show ip interface brief vrf TENANT
-% Invalid input
-Leaf-1#show ip interface brief ?
-  >     Redirect output to URL
-  >>    Append redirected output to URL
-  |     Command output pipe filters
-  <cr>
 ```
 ```
 Leaf-1#sh vrf
