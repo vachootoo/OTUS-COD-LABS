@@ -124,7 +124,7 @@ interface Vlan30
    ip address virtual 172.16.30.254/24
 !
 ```
-**Настройка VXLAN**
+**Настройка VxLAN**
 
 На существующем интерфейсе Vxlan1 добавляем L2VNI:
 ```
