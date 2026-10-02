@@ -75,7 +75,9 @@ L3VNI: 50000
 | `VLAN 20` | `Host-2` | `172.16.30.20/24` | `172.16.30.254` |
 
 ## 3. Схема сети
-multihoming_scheme.png
+
+![схема сети](multihoming_scheme.png)
+
 ## 4. EVPN Multihoming
 
 В отличие от MLAG, Leaf-1 и Leaf-2 не образуют одну логическую систему.
