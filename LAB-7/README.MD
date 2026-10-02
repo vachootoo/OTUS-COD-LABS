@@ -963,6 +963,85 @@ end
 
 ## 6. Проверка
 
-
-
+show lacp peer
+```
+Leaf-1#  show lacp peer
+State: A = Active, P = Passive; S=ShortTimeout, L=LongTimeout;
+       G = Aggregable, I = Individual; s+=InSync, s-=OutOfSync;
+       C = Collecting, X = state machine expired,
+       D = Distributing, d = default neighbor state
+                 |                        Partner
+ Port    Status  | Sys-id                    Port#   State     OperKey  PortPri
+------ ----------|------------------------- ------- --------- --------- -------
+Port Channel Port-Channel6:
+ Et6     Bundled | 8000,50-83-7c-2e-ee-60        6   ALGs+CD    0x0038    32768
+```
+```
+Leaf-2#show lacp peer
+State: A = Active, P = Passive; S=ShortTimeout, L=LongTimeout;
+       G = Aggregable, I = Individual; s+=InSync, s-=OutOfSync;
+       C = Collecting, X = state machine expired,
+       D = Distributing, d = default neighbor state
+                 |                        Partner
+ Port    Status  | Sys-id                    Port#   State     OperKey  PortPri
+------ ----------|------------------------- ------- --------- --------- -------
+Port Channel Port-Channel5:
+ Et5     Bundled | 8000,50-a3-41-3e-c2-90        3   ALGs+CD    0x0022    32768
+Port Channel Port-Channel6:
+ Et6     Bundled | 8000,50-83-7c-2e-ee-60        5   ALGs+CD    0x0038    32768
+```
+```
+Leaf-3#show lacp peer
+State: A = Active, P = Passive; S=ShortTimeout, L=LongTimeout;
+       G = Aggregable, I = Individual; s+=InSync, s-=OutOfSync;
+       C = Collecting, X = state machine expired,
+       D = Distributing, d = default neighbor state
+                 |                        Partner
+ Port    Status  | Sys-id                    Port#   State     OperKey  PortPri
+------ ----------|------------------------- ------- --------- --------- -------
+Port Channel Port-Channel5:
+ Et5     Bundled | 8000,50-a3-41-3e-c2-90        4   ALGs+CD    0x0022    32768
+```
+```
+Leaf-1#show bgp evpn instance vlan 10
+EVPN instance: VLAN 10
+  Route distinguisher: 10.255.0.11:10010
+  Route target import: Route-Target-AS:65000:10010
+  Route target export: Route-Target-AS:65000:10010
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.255.0.11
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0000:0000:0000:0010
+      Type: 0 (administratively configured)
+      Interface: Port-Channel6
+      Mode: all-active
+      State: up
+      ES-Import RT: 00:00:00:00:00:10
+      DF election algorithm: modulus
+      Designated forwarder: 10.255.0.11
+      Non-Designated forwarder: 10.255.0.12
+```
+```
+Leaf-3#show bgp evpn instance vlan 30
+EVPN instance: VLAN 30
+  Route distinguisher: 10.255.0.13:10030
+  Route target import: Route-Target-AS:65000:10030
+  Route target export: Route-Target-AS:65000:10030
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.255.0.13
+  VXLAN: enabled
+  MPLS: disabled
+  Local ethernet segment:
+    ESI: 0000:0000:0000:0000:0030
+      Type: 0 (administratively configured)
+      Interface: Port-Channel5
+      Mode: all-active
+      State: up
+      ES-Import RT: 00:00:00:00:00:30
+      DF election algorithm: modulus
+      Designated forwarder: 10.255.0.12
+      Non-Designated forwarder: 10.255.0.13
+```
 
