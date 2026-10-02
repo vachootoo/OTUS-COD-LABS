@@ -138,81 +138,57 @@ ES-Import RT
 Он используется EVPN Type-4 маршрутами и позволяет Leaf определить участников одного Ethernet Segment.
 
 Значение должно совпадать на Leaf-1 и Leaf-2:
-
+```
 Leaf-1:
 00:00:00:00:00:10
 
 Leaf-2:
 00:00:00:00:00:10
-
+```
 ES-Import RT не следует путать с обычным Route Target VLAN/VNI.
 
 Например:
-
+```
 VLAN 10 RT:
 65000:10010
 
 ES-Import RT:
 00:00:00:00:00:10
-
+```
 Это разные сущности.
 
 LACP System-ID
 
 HOST подключён к двум физически независимым коммутаторам:
 
-           HOST
-          /    \
-      Leaf-1  Leaf-2
-
-Однако для создания одного LACP Port-Channel HOST должен воспринимать оба Leaf как одного LACP-партнёра.
-
-Поэтому на обоих Leaf назначается одинаковый:
-
+На обоих Leaf назначается одинаковый:
+```
 LACP System-ID
-
-В лаборатории:
-
+```
+Например:
+```
 0200.0000.0010
-
+```
 То есть:
 
 02:00:00:00:00:10
 
 На обоих Leaf:
-
+```
 Leaf-1: 0200.0000.0010
 Leaf-2: 0200.0000.0010
-
+```
 Значение начинается с 02, чтобы использовать locally administered MAC address.
 
-Таким образом:
-
-HOST
- |
- +-- eth1 --> Leaf-1 \
- |                  +--> LACP Partner 02:00:00:00:00:10
- +-- eth2 --> Leaf-2 /
-
-Для Linux оба соединения выглядят как соединения с одним LACP System.
-
-EVPN Route Types
+**EVPN Route Types**
 
 После настройки Multihoming в EVPN control plane используются следующие типы маршрутов.
 
-Type-1 — Ethernet Auto-Discovery
+**Type-1 — Ethernet Auto-Discovery**
 
 Type-1 сообщает остальным VTEP:
 
-данный Ethernet Segment доступен через этот PE
-
-Например:
-
-ESI 0000:0000:0000:0000:0010
-
-        +--> Leaf-1 / 10.255.0.11
-        |
-        +--> Leaf-2 / 10.255.0.12
+данный Ethernet Segment доступен через этот VTEP.
 
 Это позволяет удалённому Leaf знать, что HOST доступен через оба VTEP.
 
@@ -222,39 +198,39 @@ aliasing;
 
 быстрого удаления путей при отказе Ethernet Segment;
 
-построения ECMP к multihomed CE.
+построения ECMP к multihomed хостам.
 
-Type-2 — MAC/IP Advertisement
+**Type-2 — MAC/IP Advertisement**
 
 Type-2 используется для распространения MAC/IP информации о хостах.
 
 Например:
-
+```
 HOST:
-IP  = 172.16.10.10
+IP  = 172.16.10.20
 MAC = xx:xx:xx:xx:xx:xx
-
+```
 Type-2 маршрут для multihomed HOST содержит ESI:
-
+```
 MAC
 IP
 VNI
 ESI
-
+```
 Благодаря ESI удалённый VTEP понимает, что данный MAC относится к multihomed Ethernet Segment.
 
-Type-3 — IMET
+**Type-3 — IMET**
 
 Type-3 уже использовался до Multihoming.
 
 Он используется для распространения информации, необходимой для обработки:
-
+```
 BUM
 Broadcast
 Unknown Unicast
 Multicast
-
-Type-4 — Ethernet Segment Route
+```
+**Type-4 — Ethernet Segment Route**
 
 После настройки Multihoming появляется новый EVPN маршрут:
 
@@ -263,15 +239,15 @@ Type-4 Ethernet Segment Route
 Он используется для обнаружения Leaf, подключённых к одному Ethernet Segment.
 
 Leaf-1 объявляет:
-
+```
 ESI: 0000:0000:0000:0000:0010
 VTEP: 10.255.0.11
-
+```
 Leaf-2 объявляет:
-
+```
 ESI: 0000:0000:0000:0000:0010
 VTEP: 10.255.0.12
-
+```
 После обмена Type-4 маршрутами Leaf понимают:
 
 мы подключены к одному Ethernet Segment
