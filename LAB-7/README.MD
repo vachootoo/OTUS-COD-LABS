@@ -254,7 +254,21 @@ VTEP: 10.255.0.12
 
 Type-4 также используется для DF Election.
 
+**Designated Forwarder**
+
+Несмотря на режим All-Active, для Ethernet Segment выбирается:
+
+DF — Designated Forwarder
+
+DF особенно важен при передаче BUM-трафика из VXLAN к хостам.
+
+Только DF передаёт соответствующий BUM-трафик в Ethernet Segment.
+
+Это предотвращает получение HOST двух копий одного broadcast/multicast пакета.
+
+Для обычного unicast-трафика режим остаётся All-Active.
 
 ## 5. Схема сети
+
 
 
