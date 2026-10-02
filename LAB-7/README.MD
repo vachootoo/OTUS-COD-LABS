@@ -511,6 +511,7 @@ vlan 30
 vrf instance TENANT
 !
 interface Port-Channel6
+   description Host-1
    switchport access vlan 10
    !
    evpn ethernet-segment
@@ -533,6 +534,7 @@ interface Ethernet4
 interface Ethernet5
 !
 interface Ethernet6
+   description Host-1
    channel-group 6 mode active
 !
 interface Ethernet7
@@ -666,6 +668,7 @@ vlan 30
 vrf instance TENANT
 !
 interface Port-Channel5
+   description Host-2
    switchport access vlan 30
    !
    evpn ethernet-segment
@@ -674,6 +677,7 @@ interface Port-Channel5
    lacp system-id 0200.0000.0030
 !
 interface Port-Channel6
+   description Host-1
    switchport access vlan 10
    !
    evpn ethernet-segment
@@ -697,13 +701,14 @@ interface Ethernet3
 interface Ethernet4
 !
 interface Ethernet5
+   description Host-2
    channel-group 5 mode active
 !
 interface Ethernet6
+   description Host-1
    channel-group 6 mode active
 !
 interface Ethernet7
-   lacp timer fast
 !
 interface Ethernet8
    switchport access vlan 20
@@ -834,6 +839,7 @@ vlan 30
 vrf instance TENANT
 !
 interface Port-Channel5
+   description Host-2
    switchport access vlan 30
    !
    evpn ethernet-segment
@@ -854,6 +860,7 @@ interface Ethernet3
 interface Ethernet4
 !
 interface Ethernet5
+   description Host-1
    channel-group 5 mode active
 !
 interface Ethernet6
