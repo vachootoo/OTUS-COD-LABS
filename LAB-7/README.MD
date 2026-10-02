@@ -1002,6 +1002,8 @@ State: A = Active, P = Passive; S=ShortTimeout, L=LongTimeout;
 Port Channel Port-Channel5:
  Et5     Bundled | 8000,50-a3-41-3e-c2-90        4   ALGs+CD    0x0022    32768
 ```
+show bgp evpn instance vlan
+
 ```
 Leaf-1#show bgp evpn instance vlan 10
 EVPN instance: VLAN 10
@@ -1044,4 +1046,81 @@ EVPN instance: VLAN 30
       Designated forwarder: 10.255.0.12
       Non-Designated forwarder: 10.255.0.13
 ```
+show bgp evpn route-type ethernet-segment
+
+```
+Leaf-2#show bgp evpn route-type ethernet-segment
+BGP routing table information for VRF default
+Router identifier 10.255.0.12, local AS number 65102
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.255.0.11:1 ethernet-segment 0000:0000:0000:0000:0010 10.255.0.11
+                                 10.255.0.11           -       100     0       65000 65101 i
+ *  ec    RD: 10.255.0.11:1 ethernet-segment 0000:0000:0000:0000:0010 10.255.0.11
+                                 10.255.0.11           -       100     0       65000 65101 i
+ * >      RD: 10.255.0.12:1 ethernet-segment 0000:0000:0000:0000:0010 10.255.0.12
+                                 -                     -       -       0       i
+ * >      RD: 10.255.0.12:1 ethernet-segment 0000:0000:0000:0000:0030 10.255.0.12
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.13:1 ethernet-segment 0000:0000:0000:0000:0030 10.255.0.13
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:1 ethernet-segment 0000:0000:0000:0000:0030 10.255.0.13
+                                 10.255.0.13           -       100     0       65000 65103 i
+```
+
+Пингуем Host-1 с Host-2
+```
+host-2#ping 172.16.10.20
+PING 172.16.10.20 (172.16.10.20) 72(100) bytes of data.
+80 bytes from 172.16.10.20: icmp_seq=1 ttl=62 time=17.0 ms
+80 bytes from 172.16.10.20: icmp_seq=2 ttl=62 time=10.4 ms
+80 bytes from 172.16.10.20: icmp_seq=3 ttl=62 time=6.27 ms
+80 bytes from 172.16.10.20: icmp_seq=4 ttl=62 time=6.67 ms
+80 bytes from 172.16.10.20: icmp_seq=5 ttl=62 time=6.72 ms
+
+--- 172.16.10.20 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 56ms
+rtt min/avg/max/mdev = 6.265/9.404/16.955/4.063 ms, pipe 2, ipg/ewma 14.102/12.979 ms
+```
+Проверяем информацию по mac адресам
+
+```
+Leaf-2#show bgp evpn route-type mac-ip
+BGP routing table information for VRF default
+Router identifier 10.255.0.12, local AS number 65102
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >Ec    RD: 10.255.0.11:10010 mac-ip 5083.7c2e.ee60
+                                 10.255.0.11           -       100     0       65000 65101 i
+ *  ec    RD: 10.255.0.11:10010 mac-ip 5083.7c2e.ee60
+                                 10.255.0.11           -       100     0       65000 65101 i
+ * >      RD: 10.255.0.12:10010 mac-ip 5083.7c2e.ee60
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.11:10010 mac-ip 5083.7c2e.ee60 172.16.10.20
+                                 10.255.0.11           -       100     0       65000 65101 i
+ *  ec    RD: 10.255.0.11:10010 mac-ip 5083.7c2e.ee60 172.16.10.20
+                                 10.255.0.11           -       100     0       65000 65101 i
+ * >      RD: 10.255.0.12:10010 mac-ip 5083.7c2e.ee60 172.16.10.20
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.13:10030 mac-ip 50a3.413e.c290
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:10030 mac-ip 50a3.413e.c290
+                                 10.255.0.13           -       100     0       65000 65103 i
+ * >      RD: 10.255.0.12:10030 mac-ip 50a3.413e.c290 172.16.30.20
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.255.0.13:10030 mac-ip 50a3.413e.c290 172.16.30.20
+                                 10.255.0.13           -       100     0       65000 65103 i
+ *  ec    RD: 10.255.0.13:10030 mac-ip 50a3.413e.c290 172.16.30.20
+                                 10.255.0.13           -       100     0       65000 65103 i
+```
+
+
 
