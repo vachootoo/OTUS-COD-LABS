@@ -1124,5 +1124,76 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
                                  10.255.0.13           -       100     0       65000 65103 i
 ```
 
+**Проверка отказоусточивости**
+
+Проверим доступность Host-2
+```
+Leaf-1#show bgp evpn route-type mac-ip 172.16.30.20 detail
+BGP routing table information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+BGP routing table entry for mac-ip 50a3.413e.c290 172.16.30.20, Route Distinguisher: 10.255.0.12:10030
+ Paths: 2 available
+  65000 65102
+    10.255.0.12 from 10.255.0.2 (10.255.0.2)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP head, ECMP, best, ECMP contributor
+      Extended Community: Route-Target-AS:65000:10030 Route-Target-AS:65000:50000 TunnelEncap:tunnelTypeVxlan EvpnRouterMac:50:05:19:78:3f:6e EvpnNdFlags:pflag
+      VNI: 10030 L3 VNI: 50000 ESI: 0000:0000:0000:0000:0030
+  65000 65102
+    10.255.0.12 from 10.255.0.1 (10.255.0.1)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP, ECMP contributor
+      Extended Community: Route-Target-AS:65000:10030 Route-Target-AS:65000:50000 TunnelEncap:tunnelTypeVxlan EvpnRouterMac:50:05:19:78:3f:6e EvpnNdFlags:pflag
+      VNI: 10030 L3 VNI: 50000 ESI: 0000:0000:0000:0000:0030
+BGP routing table entry for mac-ip 50a3.413e.c290 172.16.30.20, Route Distinguisher: 10.255.0.13:10030
+ Paths: 2 available
+  65000 65103
+    10.255.0.13 from 10.255.0.1 (10.255.0.1)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP head, ECMP, best, ECMP contributor
+      Extended Community: Route-Target-AS:65000:10030 Route-Target-AS:65000:50000 TunnelEncap:tunnelTypeVxlan EvpnRouterMac:50:06:2c:ed:74:bf
+      VNI: 10030 L3 VNI: 50000 ESI: 0000:0000:0000:0000:0030
+  65000 65103
+    10.255.0.13 from 10.255.0.2 (10.255.0.2)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP, ECMP contributor
+      Extended Community: Route-Target-AS:65000:10030 Route-Target-AS:65000:50000 TunnelEncap:tunnelTypeVxlan EvpnRouterMac:50:06:2c:ed:74:bf
+      VNI: 10030 L3 VNI: 50000 ESI: 0000:0000:0000:0000:0030
+```
+Видим что Host-2 доступен через Leaf-2 и Leaf-3.
+
+Погасим порт 5 на Leaf-2 и проверим пинги
+
+```
+host-1#ping 172.16.30.20
+PING 172.16.30.20 (172.16.30.20) 72(100) bytes of data.
+80 bytes from 172.16.30.20: icmp_seq=1 ttl=63 time=9.97 ms
+80 bytes from 172.16.30.20: icmp_seq=2 ttl=63 time=5.39 ms
+80 bytes from 172.16.30.20: icmp_seq=3 ttl=63 time=4.93 ms
+80 bytes from 172.16.30.20: icmp_seq=4 ttl=63 time=6.45 ms
+80 bytes from 172.16.30.20: icmp_seq=5 ttl=63 time=4.91 ms
+
+--- 172.16.30.20 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 40ms
+rtt min/avg/max/mdev = 4.912/6.329/9.973/1.905 ms, ipg/ewma 10.110/8.088 ms
+```
+Теперь Host-2 доступен только через Leaf-3:
+
+```
+Leaf-1#show bgp evpn route-type mac-ip 172.16.30.20 detail
+BGP routing table information for VRF default
+Router identifier 10.255.0.11, local AS number 65101
+BGP routing table entry for mac-ip 50a3.413e.c290 172.16.30.20, Route Distinguisher: 10.255.0.13:10030
+ Paths: 2 available
+  65000 65103
+    10.255.0.13 from 10.255.0.1 (10.255.0.1)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP head, ECMP, best, ECMP contributor
+      Extended Community: Route-Target-AS:65000:10030 Route-Target-AS:65000:50000 TunnelEncap:tunnelTypeVxlan EvpnRouterMac:50:06:2c:ed:74:bf
+      VNI: 10030 L3 VNI: 50000 ESI: 0000:0000:0000:0000:0030
+  65000 65103
+    10.255.0.13 from 10.255.0.2 (10.255.0.2)
+      Origin IGP, metric -, localpref 100, weight 0, tag 0, valid, external, ECMP, ECMP contributor
+      Extended Community: Route-Target-AS:65000:10030 Route-Target-AS:65000:50000 TunnelEncap:tunnelTypeVxlan EvpnRouterMac:50:06:2c:ed:74:bf
+      VNI: 10030 L3 VNI: 50000 ESI: 0000:0000:0000:0000:0030
+```
+
+
+
 
 
