@@ -2,7 +2,7 @@
 - [Построение Underlay сети (OSPF)](/LAB-2/README.MD)
 - [Построение Underlay сети (IS-IS)](/LAB-3/README.MD)
 - [Построение Underlay сети (eBGP)](/LAB-4/README.MD)
-- [Построение Underlay сети (IS-IS)](/LAB-5/README.MD)
+- [VxLAN. EVPN L2](/LAB-5/README.MD)
 - [Построение Underlay сети (IS-IS)](/LAB-6/README.MD)
 - [Построение Underlay сети (IS-IS)](/LAB-7/README.MD)
 - [Построение Underlay сети (IS-IS)](/LAB-8/README.MD)
