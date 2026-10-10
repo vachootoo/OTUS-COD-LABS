@@ -4,5 +4,5 @@
 - [Построение Underlay сети (eBGP)](/LAB-4/README.MD)
 - [VxLAN. EVPN L2](/LAB-5/README.MD)
 - [VxLAN. EVPN L3](/LAB-6/README.MD)
-- [Построение Underlay сети (IS-IS)](/LAB-7/README.MD)
+- [VXLAN. Multihoming](/LAB-7/README.MD)
 - [Построение Underlay сети (IS-IS)](/LAB-8/README.MD)
