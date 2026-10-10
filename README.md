@@ -1,3 +1,3 @@
-- [Документация модуля API](src/api/README.md)
+- [Документация модуля API](/LAB-1/README.md)
 - [Руководство по настройке](docs/setup.md)
 - [Примеры кода](examples/)
