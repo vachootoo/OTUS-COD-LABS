@@ -17,7 +17,7 @@
 
 | Назначение | POD-A | POD-X |
 |---|---|---|
-| Infrastructure aggregate | 10.1.0.0/16 | 10.2.0.0/16 |
+| Underlay | 10.1.0.0/16 | 10.2.0.0/16 |
 | Loopback0: Router ID/EVPN | 10.1.0.0/24 | 10.2.0.0/24 |
 | Loopback1: VTEP | 10.1.1.0/24 | 10.2.1.0/24 |
 | eBGP P2P Spine-1 | 10.1.10.0/24 | 10.2.10.0/24 |
