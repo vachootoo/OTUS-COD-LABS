@@ -2397,6 +2397,21 @@ rtt min/avg/max/mdev = 11.374/16.130/27.545/6.001 ms, pipe 3, ipg/ewma 17.387/21
 ```
 Все три хоста в POD-X доступны
 
+Проверим полный отказ A-BGW-1
+
+Пингуем c A-Host-1 с X-Host-1
+```
+80 bytes from 172.16.10.100: icmp_seq=76 ttl=64 time=13.7 ms
+80 bytes from 172.16.10.100: icmp_seq=77 ttl=64 time=14.2 ms
+80 bytes from 172.16.10.100: icmp_seq=78 ttl=64 time=14.6 ms
+80 bytes from 172.16.10.100: icmp_seq=79 ttl=64 time=13.6 ms
+
+80 bytes from 172.16.10.100: icmp_seq=650 ttl=64 time=16.5 ms
+80 bytes from 172.16.10.100: icmp_seq=651 ttl=64 time=13.3 ms
+80 bytes from 172.16.10.100: icmp_seq=652 ttl=64 time=12.0 ms
+80 bytes from 172.16.10.100: icmp_seq=653 ttl=64 time=14.3 ms
+```
+
 
 
 
