@@ -2411,7 +2411,15 @@ rtt min/avg/max/mdev = 11.374/16.130/27.545/6.001 ms, pipe 3, ipg/ewma 17.387/21
 80 bytes from 172.16.10.100: icmp_seq=652 ttl=64 time=12.0 ms
 80 bytes from 172.16.10.100: icmp_seq=653 ttl=64 time=14.3 ms
 ```
+Отключим et5 на A-BGW-2 и проверим статистику потерянных пакетов на A-Host-1 и, как видим потеря одного линка не оказала сильного влияния на трафик. 
 
+```
+--- 172.16.30.100 ping statistics ---
+1000 packets transmitted, 997 received, 0.3% packet loss, time 16318ms
+rtt min/avg/max/mdev = 10.678/14.821/23.373/1.698 ms, pipe 2, ipg/ewma 16.334/14.353 ms
+A-Host-1#
+
+```
 
 
 
