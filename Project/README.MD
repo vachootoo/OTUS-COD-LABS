@@ -2448,6 +2448,22 @@ rtt min/avg/max/mdev = 7.268/21.088/40.946/13.131 ms, pipe 5, ipg/ewma 11.032/13
 A-Host-1#
 
 ```
+Самая опасная ситуация - потеря обоих DCI одного из BGW, так как в этом случае не пропадает анонс в локальный eBGP Underlay и часть трафика или весь может попасть на нерабочий BGW.
+
+```
+80 bytes from 172.16.30.100: icmp_seq=101 ttl=60 time=15.9 ms
+80 bytes from 172.16.30.100: icmp_seq=102 ttl=60 time=14.4 ms
+80 bytes from 172.16.30.100: icmp_seq=103 ttl=60 time=14.2 ms
+80 bytes from 172.16.30.100: icmp_seq=104 ttl=60 time=13.4 ms
+80 bytes from 172.16.30.100: icmp_seq=105 ttl=60 time=16.7 ms
+From 172.16.30.254 icmp_seq=107 Destination Host Unreachable
+From 172.16.30.254 icmp_seq=108 Destination Host Unreachable
+From 172.16.30.254 icmp_seq=109 Destination Host Unreachable
+From 172.16.30.254 icmp_seq=110 Destination Host Unreachable
+From 172.16.30.254 icmp_seq=111 Destination Host Unreachable
+From 172.16.30.254 icmp_seq=112 Destination Host Unreachable
+```
+В таком случае можно увиличить количестов BGW, чтобы снизить риски или настраивать link tracking, чтобы в случае отказа обоих линков - исчезал нерабочий анонс.
 
 
 
