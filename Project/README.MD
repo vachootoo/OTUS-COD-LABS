@@ -2128,3 +2128,18 @@ end
 
 ## 6. Проверки 
 
+Проверям bgp соседство для A-Leaf-1
+
+```
+A-Leaf-1#sh bgp summary
+BGP summary information for VRF default
+Router identifier 10.1.0.11, local AS number 65111
+Neighbor           AS Session State AFI/SAFI                AFI/SAFI State   NLRI Rcd   NLRI Acc
+--------- ----------- ------------- ----------------------- -------------- ---------- ----------
+10.1.0.1        65001 Established   L2VPN EVPN              Negotiated             25         25
+10.1.0.2        65001 Established   L2VPN EVPN              Negotiated             25         25
+10.1.10.0       65001 Established   IPv4 Unicast            Negotiated             14         14
+10.1.20.0       65001 Established   IPv4 Unicast            Negotiated             14         14
+```
+
+
