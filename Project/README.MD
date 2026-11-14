@@ -2420,7 +2420,34 @@ rtt min/avg/max/mdev = 10.678/14.821/23.373/1.698 ms, pipe 2, ipg/ewma 16.334/14
 A-Host-1#
 
 ```
+Проведем проверку полной потели связи между POD - внутриподовая связность хостов не нарушена:
 
+```
+A-Host-1#ping 172.16.20.20
+PING 172.16.20.20 (172.16.20.20) 72(100) bytes of data.
+80 bytes from 172.16.20.20: icmp_seq=1 ttl=63 time=5.48 ms
+80 bytes from 172.16.20.20: icmp_seq=2 ttl=63 time=4.42 ms
+80 bytes from 172.16.20.20: icmp_seq=3 ttl=63 time=3.86 ms
+80 bytes from 172.16.20.20: icmp_seq=4 ttl=63 time=3.77 ms
+80 bytes from 172.16.20.20: icmp_seq=5 ttl=63 time=3.68 ms
+
+--- 172.16.20.20 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 24ms
+rtt min/avg/max/mdev = 3.680/4.241/5.478/0.670 ms, ipg/ewma 5.944/4.822 ms
+A-Host-1#ping 172.16.30.200
+PING 172.16.30.200 (172.16.30.200) 72(100) bytes of data.
+80 bytes from 172.16.30.200: icmp_seq=4 ttl=63 time=7.27 ms
+80 bytes from 172.16.30.200: icmp_seq=1 ttl=63 time=40.9 ms
+80 bytes from 172.16.30.200: icmp_seq=2 ttl=63 time=30.4 ms
+80 bytes from 172.16.30.200: icmp_seq=3 ttl=63 time=19.5 ms
+80 bytes from 172.16.30.200: icmp_seq=5 ttl=63 time=7.36 ms
+
+--- 172.16.30.200 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 44ms
+rtt min/avg/max/mdev = 7.268/21.088/40.946/13.131 ms, pipe 5, ipg/ewma 11.032/13.648 ms
+A-Host-1#
+
+```
 
 
 
