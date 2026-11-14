@@ -87,3 +87,633 @@
 | X-Host-1 | 172.16.30.30/24 | 30 | X-Leaf-1 Eth6 |
 | X-Host-2 | 172.16.30.100/24 | 30 | X-Leaf-1/2 Eth5, **MLAG LACP** |
 | X-Host-3 | 172.16.30.31/24 | 30 | X-Leaf-2 Eth6 |
+
+## 5. Конфигурация устройств.
+
+<details>
+<summary>A-Spine-1</summary>
+
+```
+A-Spine-1#sh run
+! Command: show running-config
+! device: A-Spine-1 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname A-Spine-1
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   mtu 9000
+   no switchport
+   ip address 10.1.10.0/31
+!
+interface Ethernet2
+   mtu 9000
+   no switchport
+   ip address 10.1.10.2/31
+!
+interface Ethernet3
+   mtu 9000
+   no switchport
+   ip address 10.1.10.4/31
+!
+interface Ethernet4
+   mtu 9000
+   no switchport
+   ip address 10.1.10.6/31
+!
+interface Ethernet5
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.1.0.1/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65001
+   router-id 10.1.0.1
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   maximum-paths 8 ecmp 8
+   neighbor EVPN-LOCAL peer group
+   neighbor EVPN-LOCAL next-hop-unchanged
+   neighbor EVPN-LOCAL update-source Loopback0
+   neighbor EVPN-LOCAL ebgp-multihop 5
+   neighbor EVPN-LOCAL send-community extended
+   neighbor UNDERLAY peer group
+   neighbor 10.1.0.11 peer group EVPN-LOCAL
+   neighbor 10.1.0.11 remote-as 65111
+   neighbor 10.1.0.12 peer group EVPN-LOCAL
+   neighbor 10.1.0.12 remote-as 65112
+   neighbor 10.1.0.21 peer group EVPN-LOCAL
+   neighbor 10.1.0.21 remote-as 65131
+   neighbor 10.1.0.22 peer group EVPN-LOCAL
+   neighbor 10.1.0.22 remote-as 65132
+   neighbor 10.1.10.1 peer group UNDERLAY
+   neighbor 10.1.10.1 remote-as 65111
+   neighbor 10.1.10.1 description A-LEAF-1
+   neighbor 10.1.10.3 peer group UNDERLAY
+   neighbor 10.1.10.3 remote-as 65112
+   neighbor 10.1.10.3 description A-LEAF-2
+   neighbor 10.1.10.5 peer group UNDERLAY
+   neighbor 10.1.10.5 remote-as 65131
+   neighbor 10.1.10.5 description A-BGW-1
+   neighbor 10.1.10.7 peer group UNDERLAY
+   neighbor 10.1.10.7 remote-as 65132
+   neighbor 10.1.10.7 description A-BGW-2
+   !
+   address-family evpn
+      neighbor EVPN-LOCAL activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.1.0.1/32
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+
+```
+
+</details>
+
+<details>
+
+<details>
+<summary>A-Spine-2</summary>
+
+```
+A-Spine-2#sh run
+! Command: show running-config
+! device: A-Spine-2 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname A-Spine-2
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+interface Ethernet1
+   mtu 9000
+   no switchport
+   ip address 10.1.20.0/31
+!
+interface Ethernet2
+   mtu 9000
+   no switchport
+   ip address 10.1.20.2/31
+!
+interface Ethernet3
+   mtu 9000
+   no switchport
+   ip address 10.1.20.4/31
+!
+interface Ethernet4
+   mtu 9000
+   no switchport
+   ip address 10.1.20.6/31
+!
+interface Ethernet5
+   no switchport
+!
+interface Ethernet6
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.1.0.2/32
+!
+interface Management1
+!
+ip routing
+!
+router bgp 65001
+   router-id 10.1.0.2
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   maximum-paths 8 ecmp 8
+   neighbor EVPN-LOCAL peer group
+   neighbor EVPN-LOCAL next-hop-unchanged
+   neighbor EVPN-LOCAL update-source Loopback0
+   neighbor EVPN-LOCAL ebgp-multihop 5
+   neighbor EVPN-LOCAL send-community extended
+   neighbor UNDERLAY peer group
+   neighbor 10.1.0.11 peer group EVPN-LOCAL
+   neighbor 10.1.0.11 remote-as 65111
+   neighbor 10.1.0.12 peer group EVPN-LOCAL
+   neighbor 10.1.0.12 remote-as 65112
+   neighbor 10.1.0.21 peer group EVPN-LOCAL
+   neighbor 10.1.0.21 remote-as 65131
+   neighbor 10.1.0.22 peer group EVPN-LOCAL
+   neighbor 10.1.0.22 remote-as 65132
+   neighbor 10.1.20.1 peer group UNDERLAY
+   neighbor 10.1.20.1 remote-as 65111
+   neighbor 10.1.20.1 description A-Leaf-1
+   neighbor 10.1.20.3 peer group UNDERLAY
+   neighbor 10.1.20.3 remote-as 65112
+   neighbor 10.1.20.3 description A-Leaf-2
+   neighbor 10.1.20.5 peer group UNDERLAY
+   neighbor 10.1.20.5 remote-as 65131
+   neighbor 10.1.20.5 description A-BGW-1
+   neighbor 10.1.20.7 peer group UNDERLAY
+   neighbor 10.1.20.7 remote-as 65132
+   neighbor 10.1.20.7 description A-BGW-2
+   !
+   address-family evpn
+      neighbor EVPN-LOCAL activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.1.0.2/32
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+
+```
+
+</details>
+
+<details>
+
+<details>
+<summary>A-Leaf-1</summary>
+
+```
+A-Leaf-1#sh run
+! Command: show running-config
+! device: A-Leaf-1 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname A-Leaf-1
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 10
+   name vxlan10010
+!
+vlan 20
+   name vxlan10020
+!
+vrf instance TENANT
+!
+interface Port-Channel6
+   switchport access vlan 10
+   !
+   evpn ethernet-segment
+      identifier 0000:0000:0000:0000:0010
+      route-target import 00:00:00:00:00:10
+   lacp system-id 0200.0000.0010
+!
+interface Ethernet1
+   mtu 9000
+   no switchport
+   ip address 10.1.10.1/31
+!
+interface Ethernet2
+   mtu 9000
+   no switchport
+   ip address 10.1.20.1/31
+!
+interface Ethernet3
+   switchport access vlan 10
+!
+interface Ethernet4
+!
+interface Ethernet5
+!
+interface Ethernet6
+   channel-group 6 mode active
+!
+interface Ethernet7
+   speed 100full
+   lacp timer fast
+!
+interface Ethernet8
+   switchport access vlan 10
+!
+interface Loopback0
+   ip address 10.1.0.11/32
+!
+interface Loopback1
+   ip address 10.1.1.11/32
+!
+interface Management1
+!
+interface Vlan10
+   vrf TENANT
+   ip address virtual 172.16.10.254/24
+!
+interface Vlan20
+   vrf TENANT
+   ip address virtual 172.16.20.254/24
+!
+interface Vlan30
+   ip address virtual 172.16.30.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
+   vxlan vrf TENANT vni 50000
+!
+ip virtual-router mac-address 00:1c:73:00:00:99
+!
+ip routing
+ip routing vrf TENANT
+!
+ip prefix-list PL-LOOPBACKS
+   seq 10 permit 10.1.0.11/32
+   seq 20 permit 10.1.1.11/32
+!
+route-map RM-LOOPBACKS permit 10
+   match ip address prefix-list PL-LOOPBACKS
+!
+router bgp 65111
+   router-id 10.1.0.11
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   maximum-paths 8 ecmp 8
+   neighbor EVPN-LOCAL peer group
+   neighbor EVPN-LOCAL update-source Loopback0
+   neighbor EVPN-LOCAL ebgp-multihop 5
+   neighbor EVPN-LOCAL send-community extended
+   neighbor UNDERLAY peer group
+   neighbor 10.1.0.1 peer group EVPN-LOCAL
+   neighbor 10.1.0.1 remote-as 65001
+   neighbor 10.1.0.2 peer group EVPN-LOCAL
+   neighbor 10.1.0.2 remote-as 65001
+   neighbor 10.1.10.0 peer group UNDERLAY
+   neighbor 10.1.10.0 remote-as 65001
+   neighbor 10.1.20.0 peer group UNDERLAY
+   neighbor 10.1.20.0 remote-as 65001
+   redistribute connected route-map RM-LOOPBACKS
+   !
+   vlan 10
+      rd 10.1.0.11:10010
+      route-target both 65001:10010
+      redistribute learned
+   !
+   vlan 20
+      rd 10.1.0.11:10020
+      route-target both 65001:10020
+      redistribute learned
+   !
+   vlan 30
+      rd 10.1.0.11:10030
+      route-target both 65001:10030
+      redistribute learned
+   !
+   address-family evpn
+      neighbor EVPN-LOCAL activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.1.0.11/32
+   !
+   vrf TENANT
+      rd 10.1.0.11:50000
+      route-target import evpn 65000:50000
+      route-target export evpn 65000:50000
+      router-id 10.1.0.11
+      redistribute connected
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+
+```
+
+</details>
+
+<details>
+
+<details>
+<summary>A-Leaf-2</summary>
+
+```
+A-Leaf-2(config)#sh run
+! Command: show running-config
+! device: A-Leaf-2 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname A-Leaf-2
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 10
+   name vxlan10010
+!
+vlan 20
+   name vxlan10020
+!
+vlan 30
+   name vxlan10030
+!
+vrf instance TENANT
+!
+interface Port-Channel5
+   switchport access vlan 30
+!
+interface Port-Channel6
+   switchport access vlan 10
+   !
+   evpn ethernet-segment
+      identifier 0000:0000:0000:0000:0010
+      route-target import 00:00:00:00:00:10
+   lacp system-id 0200.0000.0010
+!
+interface Port-Channel7
+!
+interface Ethernet1
+   mtu 9000
+   no switchport
+   ip address 10.1.10.3/31
+!
+interface Ethernet2
+   mtu 9000
+   no switchport
+   ip address 10.1.20.3/31
+!
+interface Ethernet3
+   switchport access vlan 20
+!
+interface Ethernet4
+!
+interface Ethernet5
+   channel-group 5 mode active
+!
+interface Ethernet6
+   channel-group 6 mode active
+!
+interface Ethernet7
+   channel-group 7 mode active
+   lacp timer fast
+!
+interface Ethernet8
+   switchport access vlan 20
+!
+interface Loopback0
+   ip address 10.1.0.12/32
+!
+interface Loopback1
+   ip address 10.1.1.12/32
+!
+interface Management1
+!
+interface Vlan10
+   vrf TENANT
+   ip address virtual 172.16.10.254/24
+!
+interface Vlan20
+   vrf TENANT
+   ip address virtual 172.16.20.254/24
+!
+interface Vlan30
+   vrf TENANT
+   ip address virtual 172.16.30.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
+   vxlan vrf TENANT vni 50000
+!
+ip virtual-router mac-address 00:1c:73:00:00:99
+!
+ip routing
+ip routing vrf TENANT
+!
+ip prefix-list PL-LOOPBACKS
+   seq 10 permit 10.1.0.12/32
+   seq 20 permit 10.1.1.12/32
+!
+route-map RM-LOOPBACKS permit 10
+   match ip address prefix-list PL-LOOPBACKS
+!
+router bgp 65112
+   router-id 10.1.0.12
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   maximum-paths 8 ecmp 8
+   neighbor EVPN-LOCAL peer group
+   neighbor EVPN-LOCAL update-source Loopback0
+   neighbor EVPN-LOCAL ebgp-multihop 5
+   neighbor EVPN-LOCAL send-community extended
+   neighbor UNDERLAY peer group
+   neighbor 10.1.0.1 peer group EVPN-LOCAL
+   neighbor 10.1.0.1 remote-as 65001
+   neighbor 10.1.0.2 peer group EVPN-LOCAL
+   neighbor 10.1.0.2 remote-as 65001
+   neighbor 10.1.10.2 peer group UNDERLAY
+   neighbor 10.1.10.2 remote-as 65001
+   neighbor 10.1.20.2 peer group UNDERLAY
+   neighbor 10.1.20.2 remote-as 65001
+   redistribute connected route-map RM-LOOPBACKS
+   !
+   vlan 10
+      rd 10.1.0.12:10010
+      route-target both 65001:10010
+      redistribute learned
+   !
+   vlan 20
+      rd 10.1.0.12:10020
+      route-target both 65001:10020
+      redistribute learned
+   !
+   vlan 30
+      rd 10.1.0.12:10030
+      route-target both 65001:10030
+      redistribute learned
+   !
+   address-family evpn
+      neighbor EVPN-LOCAL activate
+   !
+   address-family ipv4
+      neighbor UNDERLAY activate
+      network 10.1.0.12/32
+   !
+   vrf TENANT
+      rd 10.1.0.12:50000
+      route-target import evpn 65000:50000
+      route-target export evpn 65000:50000
+      router-id 10.1.0.12
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+
+```
+
+</details>
+
+<details>
+
+<details>
+<summary>A-BGW-1</summary>
+
+```
+
+```
+
+</details>
+
+<details>
+
+<details>
+<summary>A-BGW-2</summary>
+
+```
+
+```
+
+</details>
+
+<details>
+
+<details>
+<summary>X-BGW-1</summary>
+
+```
+
+```
+
+</details>
+
+<details>
+
+<details>
+<summary>X-BGW-2</summary>
+
+```
+
+```
+
+</details>
+
+<details>
