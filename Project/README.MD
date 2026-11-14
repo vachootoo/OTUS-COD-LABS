@@ -2320,4 +2320,41 @@ VXLAN    VRF to VNI map for   OK
 
 ```
 
+Проверяем на каждом BGW
+
+```
+A-BGW-1#show bgp evpn instance vlan 10
+EVPN instance: VLAN 10
+  Route distinguisher: 10.1.0.21:10010
+  Route distinguisher remote: 10.1.0.21:10010
+  Route target import: Route-Target-AS:65001:10010
+  Route target export: Route-Target-AS:65001:10010
+  Route target import remote: Route-Target-AS:65000:10010
+  Route target export remote: Route-Target-AS:65000:10010
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.1.1.254
+  VXLAN: enabled
+  MPLS: disabled
+  Remote ethernet segment:
+    ESI: 0000:0000:0000:0000:0010
+    Active TEPs: 10.1.1.11, 10.1.1.12
+```
+Видим что отображается только VTEP POD-A
+
+```
+X-BGW-1#show bgp evpn instance vlan 10
+EVPN instance: VLAN 10
+  Route distinguisher: 10.2.0.21:10010
+  Route distinguisher remote: 10.2.0.21:10010
+  Route target import: Route-Target-AS:65002:10010
+  Route target export: Route-Target-AS:65002:10010
+  Route target import remote: Route-Target-AS:65000:10010
+  Route target export remote: Route-Target-AS:65000:10010
+  Service interface: VLAN-based
+  Local VXLAN IP address: 10.2.1.254
+  VXLAN: enabled
+  MPLS: disabled
+```
+Видим что отображается только VTEP POD-X, причем VXLAN адрес один так как используется MLAG.
+
 
