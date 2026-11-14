@@ -51,8 +51,6 @@
 
 ### 3.4. Loopback и ASN
 
-### 4.4. Loopback и ASN
-
 | Устройство | ASN | Loopback0 | VTEP Anycast |
 |---|---:|---|---|
 | A-Spine-1 | 65001 | 10.1.0.1 | — |
