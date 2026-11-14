@@ -404,6 +404,7 @@ interface Vlan20
    ip address virtual 172.16.20.254/24
 !
 interface Vlan30
+   vrf TENANT
    ip address virtual 172.16.30.254/24
 !
 interface Vxlan1
