@@ -92,6 +92,7 @@
 ## 5. Стенд.
 
 Стенд собран в PnetLab 5.3.11 
+
 Arista Software image version: 4.33.1.1F
 
 ![схема сети](multisite-scheme.PNG)
