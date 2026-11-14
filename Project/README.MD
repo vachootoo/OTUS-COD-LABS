@@ -2165,3 +2165,154 @@ Source Codes:
            via 10.1.20.0, Ethernet2
 ```
 
+<details>
+
+<summary>Проверяем route Type3</summary>
+
+```
+A-Leaf-1#show bgp evpn route-type imet
+BGP routing table information for VRF default
+Router identifier 10.1.0.11, local AS number 65111
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.1.0.11:10010 imet 10.1.1.11
+                                 -                     -       -       0       i
+ * >      RD: 10.1.0.11:10020 imet 10.1.1.11
+                                 -                     -       -       0       i
+ * >      RD: 10.1.0.11:10030 imet 10.1.1.11
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.1.0.12:10010 imet 10.1.1.12
+                                 10.1.1.12             -       100     0       65001 65112 i
+ *  ec    RD: 10.1.0.12:10010 imet 10.1.1.12
+                                 10.1.1.12             -       100     0       65001 65112 i
+ * >Ec    RD: 10.1.0.12:10020 imet 10.1.1.12
+                                 10.1.1.12             -       100     0       65001 65112 i
+ *  ec    RD: 10.1.0.12:10020 imet 10.1.1.12
+                                 10.1.1.12             -       100     0       65001 65112 i
+ * >Ec    RD: 10.1.0.12:10030 imet 10.1.1.12
+                                 10.1.1.12             -       100     0       65001 65112 i
+ *  ec    RD: 10.1.0.12:10030 imet 10.1.1.12
+                                 10.1.1.12             -       100     0       65001 65112 i
+ * >Ec    RD: 10.1.0.21:10010 imet 10.1.1.254
+                                 10.1.1.254            -       100     0       65001 65131 i
+ *  ec    RD: 10.1.0.21:10010 imet 10.1.1.254
+                                 10.1.1.254            -       100     0       65001 65131 i
+ * >Ec    RD: 10.1.0.21:10030 imet 10.1.1.254
+                                 10.1.1.254            -       100     0       65001 65131 i
+ *  ec    RD: 10.1.0.21:10030 imet 10.1.1.254
+                                 10.1.1.254            -       100     0       65001 65131 i
+ * >Ec    RD: 10.1.0.22:10010 imet 10.1.1.254
+                                 10.1.1.254            -       100     0       65001 65132 i
+ *  ec    RD: 10.1.0.22:10010 imet 10.1.1.254
+                                 10.1.1.254            -       100     0       65001 65132 i
+ * >Ec    RD: 10.1.0.22:10030 imet 10.1.1.254
+                                 10.1.1.254            -       100     0       65001 65132 i
+ *  ec    RD: 10.1.0.22:10030 imet 10.1.1.254
+                                 10.1.1.254            -       100     0       65001 65132 i
+```
+
+
+</details>
+
+```
+A-Leaf-1#show bgp evpn route-type ip-prefix ipv4
+BGP routing table information for VRF default
+Router identifier 10.1.0.11, local AS number 65111
+Route status codes: * - valid, > - active, S - Stale, E - ECMP head, e - ECMP
+                    c - Contributing to ECMP, % - Pending best path selection
+Origin codes: i - IGP, e - EGP, ? - incomplete
+AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Link Local Nexthop
+
+          Network                Next Hop              Metric  LocPref Weight  Path
+ * >      RD: 10.1.0.11:50000 ip-prefix 172.16.10.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.1.0.12:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.12             -       100     0       65001 65112 i
+ *  ec    RD: 10.1.0.12:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.12             -       100     0       65001 65112 i
+ * >Ec    RD: 10.1.0.21:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.254            -       100     0       65001 65131 i
+ *  ec    RD: 10.1.0.21:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.254            -       100     0       65001 65131 i
+ * >Ec    RD: 10.1.0.22:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.254            -       100     0       65001 65132 i
+ *  ec    RD: 10.1.0.22:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.254            -       100     0       65001 65132 i
+ * >Ec    RD: 10.2.0.11:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 65002 65210 i
+ *  ec    RD: 10.2.0.11:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 65002 65210 i
+ * >Ec    RD: 10.2.0.21:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 i
+ *  ec    RD: 10.2.0.21:50000 ip-prefix 172.16.10.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 i
+ * >      RD: 10.1.0.11:50000 ip-prefix 172.16.20.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.1.0.12:50000 ip-prefix 172.16.20.0/24
+                                 10.1.1.12             -       100     0       65001 65112 i
+ *  ec    RD: 10.1.0.12:50000 ip-prefix 172.16.20.0/24
+                                 10.1.1.12             -       100     0       65001 65112 i
+ * >Ec    RD: 10.1.0.21:50000 ip-prefix 172.16.20.0/24
+                                 10.1.1.254            -       100     0       65001 65131 i
+ *  ec    RD: 10.1.0.21:50000 ip-prefix 172.16.20.0/24
+                                 10.1.1.254            -       100     0       65001 65131 i
+ * >      RD: 10.1.0.11:50000 ip-prefix 172.16.30.0/24
+                                 -                     -       -       0       i
+ * >Ec    RD: 10.1.0.12:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.12             -       100     0       65001 65112 i
+ *  ec    RD: 10.1.0.12:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.12             -       100     0       65001 65112 i
+ * >Ec    RD: 10.1.0.21:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65131 i
+ *  ec    RD: 10.1.0.21:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65131 i
+ * >Ec    RD: 10.1.0.22:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65132 i
+ *  ec    RD: 10.1.0.22:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65132 i
+ * >Ec    RD: 10.2.0.11:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 65002 65210 i
+ *  ec    RD: 10.2.0.11:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 65002 65210 i
+ * >Ec    RD: 10.2.0.21:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 i
+ *  ec    RD: 10.2.0.21:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 i
+ * >Ec    RD: 10.2.0.22:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65232 i
+ *  ec    RD: 10.2.0.22:50000 ip-prefix 172.16.30.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65232 i
+ * >Ec    RD: 10.2.0.11:50000 ip-prefix 172.16.40.0/24
+                                 10.1.1.254            -       100     0       65001 65131 65231 65002 65210 i
+ *  ec    RD: 10.2.0.11:50000 ip-prefix 172.16.40.0/24
+                                 10.1.1.254            -       100     0       65001 65132 65231 65002 65210 i
+
+```
+
+```
+A-Leaf-1#show bgp evpn sanity detail
+Category Check                Status Detail
+-------- -------------------- ------ ------
+General  Send community       OK
+General  Multi-agent mode     OK
+General  Neighbor established OK
+L2       MAC-VRF route-target OK
+         import and export
+L2       MAC-VRF              OK
+         route-distinguisher
+L2       MAC-VRF redistribute OK
+L2       MAC-VRF overlapping  OK
+         VLAN
+L2       Suppressed MAC       OK
+VXLAN    VLAN to VNI map for  OK
+         MAC-VRF
+VXLAN    VRF to VNI map for   OK
+         IP-VRF
+
+```
+
+
