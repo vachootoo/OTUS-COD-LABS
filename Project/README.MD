@@ -371,7 +371,7 @@ interface Ethernet2
    ip address 10.1.20.1/31
 !
 interface Ethernet3
-   switchport access vlan 10
+   switchport access vlan 30
 !
 interface Ethernet4
 !
