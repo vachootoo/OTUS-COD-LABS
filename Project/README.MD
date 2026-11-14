@@ -2359,6 +2359,43 @@ EVPN instance: VLAN 10
 
 Проверим связность хостов
 
+```
+A-Host-1#ping 172.16.10.100
+PING 172.16.10.100 (172.16.10.100) 72(100) bytes of data.
+80 bytes from 172.16.10.100: icmp_seq=1 ttl=64 time=17.5 ms
+80 bytes from 172.16.10.100: icmp_seq=2 ttl=64 time=14.2 ms
+80 bytes from 172.16.10.100: icmp_seq=3 ttl=64 time=15.1 ms
+80 bytes from 172.16.10.100: icmp_seq=4 ttl=64 time=13.6 ms
+80 bytes from 172.16.10.100: icmp_seq=5 ttl=64 time=16.9 ms
+
+--- 172.16.10.100 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 61ms
+rtt min/avg/max/mdev = 13.628/15.481/17.503/1.496 ms, pipe 2, ipg/ewma 15.364/16                            .504 ms
+A-Host-1#ping 172.16.30.100
+PING 172.16.30.100 (172.16.30.100) 72(100) bytes of data.
+80 bytes from 172.16.30.100: icmp_seq=1 ttl=60 time=103 ms
+80 bytes from 172.16.30.100: icmp_seq=2 ttl=60 time=92.3 ms
+80 bytes from 172.16.30.100: icmp_seq=3 ttl=60 time=81.3 ms
+80 bytes from 172.16.30.100: icmp_seq=4 ttl=60 time=70.5 ms
+80 bytes from 172.16.30.100: icmp_seq=5 ttl=60 time=59.6 ms
+
+--- 172.16.30.100 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 44ms
+rtt min/avg/max/mdev = 59.616/81.345/103.068/15.374 ms, pipe 5, ipg/ewma 10.958/                            91.083 ms
+A-Host-1#ping 172.16.40.40
+PING 172.16.40.40 (172.16.40.40) 72(100) bytes of data.
+80 bytes from 172.16.40.40: icmp_seq=1 ttl=60 time=27.5 ms
+80 bytes from 172.16.40.40: icmp_seq=2 ttl=60 time=16.8 ms
+80 bytes from 172.16.40.40: icmp_seq=3 ttl=60 time=11.4 ms
+80 bytes from 172.16.40.40: icmp_seq=4 ttl=60 time=12.4 ms
+80 bytes from 172.16.40.40: icmp_seq=5 ttl=60 time=12.6 ms
+
+--- 172.16.40.40 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 70ms
+rtt min/avg/max/mdev = 11.374/16.130/27.545/6.001 ms, pipe 3, ipg/ewma 17.387/21                            .565 ms
+
+```
+Все три хоста в POD-X доступны
 
 
 
