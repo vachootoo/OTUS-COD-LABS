@@ -2218,6 +2218,10 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
 
 </details>
 
+<details>
+
+<summary>Проверяем route Type5</summary>
+
 ```
 A-Leaf-1#show bgp evpn route-type ip-prefix ipv4
 BGP routing table information for VRF default
@@ -2292,6 +2296,7 @@ AS Path Attributes: Or-ID - Originator ID, C-LST - Cluster List, LL Nexthop - Li
                                  10.1.1.254            -       100     0       65001 65132 65231 65002 65210 i
 
 ```
+</details>
 
 ```
 A-Leaf-1#show bgp evpn sanity detail
