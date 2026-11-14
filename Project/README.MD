@@ -2399,7 +2399,7 @@ rtt min/avg/max/mdev = 11.374/16.130/27.545/6.001 ms, pipe 3, ipg/ewma 17.387/21
 
 Проверим полный отказ A-BGW-1
 
-Пингуем c A-Host-1 с X-Host-1
+Пингуем c A-Host-1 с X-Host-1  и выключаем A-BGW-1, видим что трафик переключился на A-BGW-2 
 ```
 80 bytes from 172.16.10.100: icmp_seq=76 ttl=64 time=13.7 ms
 80 bytes from 172.16.10.100: icmp_seq=77 ttl=64 time=14.2 ms
