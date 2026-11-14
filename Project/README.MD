@@ -204,8 +204,6 @@ end
 </details>
 
 <details>
-
-<details>
 <summary>A-Spine-2</summary>
 
 ```
@@ -318,8 +316,6 @@ end
 ```
 
 </details>
-
-<details>
 
 <details>
 <summary>A-Leaf-1</summary>
@@ -490,8 +486,6 @@ end
 ```
 
 </details>
-
-<details>
 
 <details>
 <summary>A-Leaf-2</summary>
@@ -673,22 +667,416 @@ end
 </details>
 
 <details>
-
-<details>
 <summary>A-BGW-1</summary>
 
 ```
+A-BGW-1#sh run
+! Command: show running-config
+! device: A-BGW-1 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname A-BGW-1
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 10
+   name vxlan10010
+!
+vlan 20
+   name vxlan10020
+!
+vlan 30
+   name vxlan10030
+!
+vlan 40
+   name vxlan10040
+!
+vrf instance TENANT
+!
+interface Ethernet1
+   mtu 9000
+   no switchport
+   ip address 10.1.10.5/31
+!
+interface Ethernet2
+   mtu 9000
+   no switchport
+   ip address 10.1.20.5/31
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   mtu 9000
+   no switchport
+   ip address 10.255.0.0/31
+!
+interface Ethernet6
+   mtu 9000
+   no switchport
+   ip address 10.255.0.2/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.1.0.21/32
+!
+interface Loopback1
+   description anycast_gateway
+   ip address 10.1.1.254/32
+!
+interface Management1
+!
+interface Vlan10
+   vrf TENANT
+   ip address virtual 172.16.10.254/24
+!
+interface Vlan20
+   vrf TENANT
+   ip address virtual 172.16.20.254/24
+!
+interface Vlan30
+   vrf TENANT
+   ip address virtual 172.16.30.254/24
+!
+interface Vlan40
+   vrf TENANT
+   ip address virtual 172.16.40.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan virtual-router encapsulation mac-address 00:1c:73:ab:00:01
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
+   vxlan vrf TENANT vni 50000
+!
+ip virtual-router mac-address 00:1c:73:00:00:99
+!
+ip routing
+ip routing vrf TENANT
+!
+ip prefix-list PL-SELF-LOOPBACKS
+   seq 10 permit 10.1.0.21/32
+   seq 20 permit 10.1.1.254/32
+!
+route-map RM-DCI-OUT permit 10
+   match ip address prefix-list PL-SELF-LOOPBACKS
+!
+route-map RM-SELF-LOOPBACKS permit 10
+   match ip address prefix-list PL-SELF-LOOPBACKS
+!
+router bgp 65131
+   router-id 10.1.0.21
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   maximum-paths 8 ecmp 8
+   bgp bestpath d-path
+   neighbor EVPN-DCI peer group
+   neighbor EVPN-DCI update-source Loopback0
+   neighbor EVPN-DCI ebgp-multihop 8
+   neighbor EVPN-DCI send-community extended
+   neighbor EVPN-LOCAL peer group
+   neighbor EVPN-LOCAL update-source Loopback0
+   neighbor EVPN-LOCAL ebgp-multihop 5
+   neighbor EVPN-LOCAL send-community extended
+   neighbor UNDERLAY-DCI peer group
+   neighbor UNDERLAY-DCI route-map RM-DCI-OUT out
+   neighbor UNDERLAY-LOCAL peer group
+   neighbor 10.1.0.1 peer group EVPN-LOCAL
+   neighbor 10.1.0.1 remote-as 65001
+   neighbor 10.1.0.2 peer group EVPN-LOCAL
+   neighbor 10.1.0.2 remote-as 65001
+   neighbor 10.1.10.4 peer group UNDERLAY-LOCAL
+   neighbor 10.1.10.4 remote-as 65001
+   neighbor 10.1.10.4 description A-Spine-1
+   neighbor 10.1.20.4 peer group UNDERLAY-LOCAL
+   neighbor 10.1.20.4 remote-as 65001
+   neighbor 10.1.20.4 description A-Spine-2
+   neighbor 10.2.0.21 peer group EVPN-DCI
+   neighbor 10.2.0.21 remote-as 65231
+   no neighbor 10.2.0.21 description
+   neighbor 10.2.0.22 peer group EVPN-DCI
+   neighbor 10.2.0.22 remote-as 65232
+   no neighbor 10.2.0.22 description
+   neighbor 10.255.0.1 peer group UNDERLAY-DCI
+   neighbor 10.255.0.1 remote-as 65231
+   neighbor 10.255.0.1 description X-BGW-1
+   neighbor 10.255.0.3 peer group UNDERLAY-DCI
+   neighbor 10.255.0.3 remote-as 65232
+   neighbor 10.255.0.3 description X-BGW-2
+   redistribute connected route-map RM-SELF-LOOPBACKS
+   !
+   vlan 10
+      rd evpn domain all 10.1.0.21:10010
+      route-target both 65001:10010
+      route-target import evpn domain remote 65000:10010
+      route-target export evpn domain remote 65000:10010
+      redistribute learned
+   !
+   vlan 30
+      rd evpn domain all 10.1.0.21:10030
+      route-target both 65001:10030
+      route-target import evpn domain remote 65000:10030
+      route-target export evpn domain remote 65000:10030
+      redistribute learned
+   !
+   vlan 40
+      rd evpn domain all 10.1.0.21:10040
+      route-target both 65001:10040
+      route-target import evpn domain remote 65000:10040
+      route-target export evpn domain remote 65000:10040
+      redistribute learned
+   !
+   address-family evpn
+      neighbor EVPN-DCI activate
+      neighbor EVPN-DCI domain remote
+      neighbor EVPN-LOCAL activate
+      domain identifier 1:1
+      domain identifier 9:9 remote
+      neighbor default next-hop-self received-evpn-routes route-type ip-prefix inter-domain
+   !
+   address-family ipv4
+      neighbor UNDERLAY-DCI activate
+      neighbor UNDERLAY-LOCAL activate
+      network 10.1.0.21/32
+   !
+   vrf TENANT
+      rd 10.1.0.21:50000
+      route-target import evpn 65000:50000
+      route-target export evpn 65000:50000
+      router-id 10.1.0.21
+      redistribute connected
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+
 
 ```
 
 </details>
 
-<details>
 
 <details>
 <summary>A-BGW-2</summary>
 
 ```
+A-BGW-2(config)#sh run
+! Command: show running-config
+! device: A-BGW-2 (vEOS-lab, EOS-4.33.1.1F)
+!
+! boot system flash:/vEOS-lab.swi
+!
+no aaa root
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname A-BGW-2
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 10
+   name vxlan10010
+!
+vlan 20
+   name vxlan10020
+!
+vlan 30
+   name vxlan10030
+!
+vrf instance TENANT
+!
+interface Ethernet1
+   mtu 9000
+   no switchport
+   ip address 10.1.10.7/31
+!
+interface Ethernet2
+   mtu 9000
+   no switchport
+   ip address 10.1.20.7/31
+!
+interface Ethernet3
+!
+interface Ethernet4
+!
+interface Ethernet5
+   mtu 9000
+   no switchport
+   ip address 10.255.0.6/31
+!
+interface Ethernet6
+   mtu 9000
+   no switchport
+   ip address 10.255.0.4/31
+!
+interface Ethernet7
+!
+interface Ethernet8
+!
+interface Loopback0
+   ip address 10.1.0.22/32
+!
+interface Loopback1
+   description anycast_gateway
+   ip address 10.1.1.254/32
+!
+interface Management1
+!
+interface Vlan10
+   vrf TENANT
+   ip address virtual 172.16.10.254/24
+!
+interface Vlan30
+   vrf TENANT
+   ip address virtual 172.16.30.254/24
+!
+interface Vlan40
+   vrf TENANT
+   ip address virtual 172.16.40.254/24
+!
+interface Vxlan1
+   vxlan source-interface Loopback1
+   vxlan virtual-router encapsulation mac-address 00:1c:73:ab:00:01
+   vxlan udp-port 4789
+   vxlan vlan 10 vni 10010
+   vxlan vlan 30 vni 10030
+   vxlan vrf TENANT vni 50000
+!
+ip virtual-router mac-address 00:1c:73:00:00:99
+!
+ip routing
+ip routing vrf TENANT
+!
+ip prefix-list PL-SELF-LOOPBACKS
+   seq 10 permit 10.1.0.22/32
+   seq 20 permit 10.1.1.254/32
+!
+route-map RM-DCI-OUT permit 10
+   match ip address prefix-list PL-SELF-LOOPBACKS
+!
+route-map RM-SELF-LOOPBACKS permit 10
+   match ip address prefix-list PL-SELF-LOOPBACKS
+!
+router bgp 65132
+   router-id 10.1.0.22
+   no bgp default ipv4-unicast
+   timers bgp 3 9
+   maximum-paths 8 ecmp 8
+   bgp bestpath d-path
+   neighbor EVPN-DCI peer group
+   neighbor EVPN-DCI update-source Loopback0
+   neighbor EVPN-DCI ebgp-multihop 8
+   neighbor EVPN-DCI send-community extended
+   neighbor EVPN-LOCAL peer group
+   neighbor EVPN-LOCAL update-source Loopback0
+   neighbor EVPN-LOCAL ebgp-multihop 5
+   neighbor EVPN-LOCAL send-community extended
+   neighbor UNDERLAY-DCI peer group
+   neighbor UNDERLAY-DCI route-map RM-DCI-OUT out
+   neighbor UNDERLAY-LOCAL peer group
+   neighbor 10.1.0.1 peer group EVPN-LOCAL
+   neighbor 10.1.0.1 remote-as 65001
+   neighbor 10.1.0.2 peer group EVPN-LOCAL
+   neighbor 10.1.0.2 remote-as 65001
+   neighbor 10.1.10.6 peer group UNDERLAY-LOCAL
+   neighbor 10.1.10.6 remote-as 65001
+   neighbor 10.1.10.6 description A-Spine-1
+   neighbor 10.1.20.6 peer group UNDERLAY-LOCAL
+   neighbor 10.1.20.6 remote-as 65001
+   neighbor 10.1.20.6 description A-Spine-2
+   neighbor 10.2.0.21 peer group EVPN-DCI
+   neighbor 10.2.0.21 remote-as 65231
+   neighbor 10.2.0.22 peer group EVPN-DCI
+   neighbor 10.2.0.22 remote-as 65232
+   neighbor 10.255.0.5 peer group UNDERLAY-DCI
+   neighbor 10.255.0.5 remote-as 65231
+   neighbor 10.255.0.5 description X-BGW-1
+   neighbor 10.255.0.7 peer group UNDERLAY-DCI
+   neighbor 10.255.0.7 remote-as 65232
+   neighbor 10.255.0.7 description X-BGW-2
+   redistribute connected route-map RM-SELF-LOOPBACKS
+   !
+   vlan 10
+      rd evpn domain all 10.1.0.22:10010
+      route-target both 65001:10010
+      route-target import evpn domain remote 65000:10010
+      route-target export evpn domain remote 65000:10010
+      redistribute learned
+   !
+   vlan 30
+      rd evpn domain all 10.1.0.22:10030
+      route-target both 65001:10030
+      route-target import evpn domain remote 65000:10030
+      route-target export evpn domain remote 65000:10030
+      redistribute learned
+   !
+   vlan 40
+      rd evpn domain all 10.1.0.22:10040
+      route-target both 65001:10040
+      route-target import evpn domain remote 65000:10040
+      route-target export evpn domain remote 65000:10040
+      redistribute learned
+   !
+   address-family evpn
+      neighbor EVPN-DCI activate
+      neighbor EVPN-DCI domain remote
+      neighbor EVPN-LOCAL activate
+      domain identifier 1:1
+      domain identifier 9:9 remote
+      neighbor default next-hop-self received-evpn-routes route-type ip-prefix inter-domain
+   !
+   address-family ipv4
+      neighbor UNDERLAY-DCI activate
+      neighbor UNDERLAY-LOCAL activate
+      network 10.1.0.22/32
+   !
+   vrf TENANT
+      rd 10.1.0.22:50000
+      route-target import evpn 65000:50000
+      route-target export evpn 65000:50000
+      redistribute connected
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+end
+
 
 ```
 
