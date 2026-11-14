@@ -2141,5 +2141,27 @@ Neighbor           AS Session State AFI/SAFI                AFI/SAFI State   NLR
 10.1.10.0       65001 Established   IPv4 Unicast            Negotiated             14         14
 10.1.20.0       65001 Established   IPv4 Unicast            Negotiated             14         14
 ```
+Проверяем маршрут до BGW
+```
+A-Leaf-1#show ip route 10.1.1.254
 
+VRF: default
+Source Codes:
+       C - connected, S - static, K - kernel,
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - Other BGP Routes,
+       B I - iBGP, B E - eBGP, R - RIP, I L1 - IS-IS level 1,
+       I L2 - IS-IS level 2, O3 - OSPFv3, A B - BGP Aggregate,
+       A O - OSPF Summary, NG - Nexthop Group Static Route,
+       V - VXLAN Control Service, M - Martian,
+       DH - DHCP client installed default route,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       G  - gRIBI, RC - Route Cache Route,
+       CL - CBF Leaked Route
+
+ B E      10.1.1.254/32 [200/0]
+           via 10.1.10.0, Ethernet1
+           via 10.1.20.0, Ethernet2
+```
 
