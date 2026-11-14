@@ -82,8 +82,8 @@
 | Имя | IP | VLAN | Подключение |
 |---|---|---|---|
 | A-Host-2 | 172.16.10.12/24 | 10 | A-Leaf-1 Eth3 |
-| Host-1 | 172.16.10.11/24 | 10 | A-Leaf-1 Eth6 + A-Leaf-2 Eth6, **active-backup (без LACP)** |
-| A-Host-3 | 172.16.20.13/24 | 20 | A-Leaf-2 Eth3 |
-| X-Host-1 | 172.16.10.22/24 | 10 | X-Leaf-1 Eth6 |
-| Host-2 | 172.16.10.21/24 | 10 | X-Leaf-1/2 Eth5, **MLAG LACP** |
-| X-Host-3 | 172.16.30.23/24 | 30 | X-Leaf-2 Eth6 |
+| A-Host-1 | 172.16.10.20/24 | 10 | A-Leaf-1 Eth6 + A-Leaf-2 Eth6 |
+| A-Host-3 | 172.16.20.20/24 | 20 | A-Leaf-2 Eth3 |
+| X-Host-1 | 172.16.10.30/24 | 30 | X-Leaf-1 Eth6 |
+| X-Host-2 | 172.16.30.100/24 | 30 | X-Leaf-1/2 Eth5, **MLAG LACP** |
+| X-Host-3 | 172.16.30.31/24 | 30 | X-Leaf-2 Eth6 |
